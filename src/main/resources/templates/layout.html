@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!--<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Pencarian Bimbel</title>-->
+    <title layout:title-pattern="$CONTENT_TITLE">Pencarian Bimbel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap-grid.min.css}"/>-->
+    <!--<link rel="stylesheet" th:href="@{/css/bootstrap-reboot.min.css}"/>-->
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+    <header class="main-header">
+        <div th:replace="fragments/header"></div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="main-sidebar">
+                <div th:replace="fragments/sidebar"></div>
+            </aside>
+
+            <!--<section class="content-header">-->
+            <!---->
+            <!--</section>-->
+
+            <section class="content" role="main">
+                <div layout:fragment="content"></div>
+            </section>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div th:replace="fragments/footer"></div>
+    </footer>
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/tooltip.min.js}"></script>
+
+</body>
+</html>

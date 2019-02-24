@@ -1,0 +1,41 @@
+<nav th:fragment="header" role="navigation" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top shadow">
+    <div class="navbar-header">
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <a href="#" th:href="@{/}"
+       class="navbar-brand"
+       th:text="#{application_name}">Application Demo
+    </a>
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#" th:href="@{/}" th:text="#{nav_home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about" th:text="#{nav_about}">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact" th:text="#{nav_contact}">Contact</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" href="/signin" th:href="@{/signin}" th:text="#{nav_signin}">Sign in</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();"
+                   th:text="#{label_logout}">Logout
+                </a>
+                <form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
+            </li>
+        </ul>
+    </div>
+</nav>
