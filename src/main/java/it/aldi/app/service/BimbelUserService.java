@@ -2,6 +2,9 @@ package it.aldi.app.service;
 
 import it.aldi.app.domain.BimbelUser;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +28,13 @@ public interface BimbelUserService {
      */
     List<BimbelUser> findAll();
 
-
+    /**
+     * Get all the BimbelUser with eager load of many-to-many relationships.
+     *
+     * @return the list of entities
+     */
+    Page<BimbelUser> findAllWithEagerRelationships(Pageable pageable);
+    
     /**
      * Get the "id" bimbelUser.
      *

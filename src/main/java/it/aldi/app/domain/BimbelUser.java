@@ -5,10 +5,13 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A BimbelUser.
@@ -39,6 +42,13 @@ public class BimbelUser implements Serializable {
     @Size(min = 6)
     @Column(name = "password", nullable = false)
     private String password;
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "bimbel_user_organization",
+               joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
+    private Set<Organization> organizations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -86,6 +96,31 @@ public class BimbelUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Organization> getOrganizations() {
+        return organizations;
+    }
+
+    public BimbelUser organizations(Set<Organization> organizations) {
+        this.organizations = organizations;
+        return this;
+    }
+
+    public BimbelUser addOrganization(Organization organization) {
+        this.organizations.add(organization);
+        organization.getBimbelUsers().add(this);
+        return this;
+    }
+
+    public BimbelUser removeOrganization(Organization organization) {
+        this.organizations.remove(organization);
+        organization.getBimbelUsers().remove(this);
+        return this;
+    }
+
+    public void setOrganizations(Set<Organization> organizations) {
+        this.organizations = organizations;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
