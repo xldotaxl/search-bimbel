@@ -17,14 +17,14 @@ import java.util.Optional;
 @Repository
 public interface BimbelUserRepository extends JpaRepository<BimbelUser, Long> {
 
-    @Query(value = "select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations",
+    @Query(value = "select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles",
         countQuery = "select count(distinct bimbel_user) from BimbelUser bimbel_user")
     Page<BimbelUser> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations")
+    @Query(value = "select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles")
     List<BimbelUser> findAllWithEagerRelationships();
 
-    @Query("select bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations where bimbel_user.id =:id")
+    @Query("select bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles where bimbel_user.id =:id")
     Optional<BimbelUser> findOneWithEagerRelationships(@Param("id") Long id);
 
 }

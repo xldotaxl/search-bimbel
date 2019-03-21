@@ -19,5 +19,16 @@
                                  referencedColumnNames="id"
                                  referencedTableName="organization"/>
         
+        <addForeignKeyConstraint baseColumnNames="bimbel_user_id"
+                                 baseTableName="bimbel_user_role"
+                                 constraintName="fk_bimbel_user_role_bimbel_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="bimbel_user"/>
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="bimbel_user_role"
+                                 constraintName="fk_bimbel_user_role_role_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="role"/>
+        
     </changeSet>
 </databaseChangeLog>

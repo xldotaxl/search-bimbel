@@ -5,13 +5,12 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A BimbelUser.
@@ -49,6 +48,13 @@ public class BimbelUser implements Serializable {
                joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
     private Set<Organization> organizations = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "bimbel_user_role",
+               joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -121,6 +127,31 @@ public class BimbelUser implements Serializable {
 
     public void setOrganizations(Set<Organization> organizations) {
         this.organizations = organizations;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public BimbelUser roles(Set<Role> roles) {
+        this.roles = roles;
+        return this;
+    }
+
+    public BimbelUser addRole(Role role) {
+        this.roles.add(role);
+        role.getBimbelUsers().add(this);
+        return this;
+    }
+
+    public BimbelUser removeRole(Role role) {
+        this.roles.remove(role);
+        role.getBimbelUsers().remove(this);
+        return this;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
