@@ -30,7 +30,7 @@ public class SigninControllerTest {
 	public void testSignin() throws Exception {
 		mockMvc.perform(get("/signin"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("signin/signin"))
-			.andExpect(forwardedUrl("signin/signin"));
+			.andExpect(view().name("signin/login"))
+			.andExpect(forwardedUrl("signin/login"));
 	}
 }

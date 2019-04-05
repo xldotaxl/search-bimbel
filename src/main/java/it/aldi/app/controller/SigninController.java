@@ -16,6 +16,7 @@ public class SigninController {
 	public String signin() {
 		logger.info("Showing sign in page");
 		
-		return "signin/signin";
+//		return "signin/signin";
+		return "signin/login";
 	}
 }

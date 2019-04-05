@@ -27,3 +27,6 @@ spring:
             hibernate.generate_statistics: true
             hibernate.hbm2ddl.auto: validate
 
+liquibase:
+    change-log: classpath:/config/liquibase/master.xml
+    enabled: true

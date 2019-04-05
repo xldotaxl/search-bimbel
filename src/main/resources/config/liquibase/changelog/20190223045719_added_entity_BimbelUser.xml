@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
-    
+
     <property name="now" value="current_timestamp" dbms="postgresql"/>
 
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
@@ -18,7 +18,7 @@
     -->
     <changeSet id="20190223045719-1" author="jhipster">
         <createTable tableName="bimbel_user">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="username" type="varchar(255)">
@@ -33,9 +33,13 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="ux_bimbel_user_email" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
         <createTable tableName="bimbel_user_organization">
             <column name="organization_id" type="bigint">
                 <constraints nullable="false"/>
@@ -46,7 +50,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="bimbel_user_id, organization_id" tableName="bimbel_user_organization"/>
-        
+
         <createTable tableName="bimbel_user_role">
             <column name="role_id" type="bigint">
                 <constraints nullable="false"/>
@@ -57,7 +61,7 @@
         </createTable>
 
         <addPrimaryKey columnNames="bimbel_user_id, role_id" tableName="bimbel_user_role"/>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

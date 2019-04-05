@@ -1,16 +1,18 @@
 package it.aldi.app.domain;
 
-
+import it.aldi.app.controller.dto.BimbelUserDto;
+import it.aldi.app.util.RegexConstant;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A BimbelUser.
@@ -21,7 +23,7 @@ import java.util.Objects;
 public class BimbelUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,19 +44,35 @@ public class BimbelUser implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull
+    @Pattern(regexp = RegexConstant.EMAIL_REGEX)
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "bimbel_user_organization",
-               joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
     private Set<Organization> organizations = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "bimbel_user_role",
-               joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
+
+    private BimbelUser(BimbelUserDto bimbelUserDto) {
+        username = bimbelUserDto.getUsername();
+        name = bimbelUserDto.getName();
+        password = bimbelUserDto.getPassword();
+        email = bimbelUserDto.getEmail();
+    }
+
+    public static BimbelUser from(BimbelUserDto bimbelUserDto) {
+        return new BimbelUser(bimbelUserDto);
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -102,6 +120,19 @@ public class BimbelUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public BimbelUser email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Organization> getOrganizations() {
@@ -182,6 +213,7 @@ public class BimbelUser implements Serializable {
             ", username='" + getUsername() + "'" +
             ", name='" + getName() + "'" +
             ", password='" + getPassword() + "'" +
+            ", email='" + getEmail() + "'" +
             "}";
     }
 }

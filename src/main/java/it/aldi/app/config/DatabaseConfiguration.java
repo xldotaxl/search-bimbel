@@ -4,8 +4,6 @@ import java.util.Arrays;
 
 import javax.sql.DataSource;
 
-import liquibase.integration.spring.SpringLiquibase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -63,19 +61,6 @@ public class DatabaseConfiguration implements EnvironmentAware{
         return new HikariDataSource(config);
     }
 
-	/* Liquibase */
-	@Bean
-	public SpringLiquibase liquibase(DataSource dataSource) {
-		SpringLiquibase liquibase = new SpringLiquibase();
-		liquibase.setDataSource(dataSource);
-		liquibase.setChangeLog("classpath:config/liquibase/master.xml");
-		liquibase.setContexts("development, production");
-        liquibase.setShouldRun(true);
-		
-		log.debug("Configuring Liquibase");
-		return liquibase;
-	}
-	
     @Bean
     public Hibernate4Module hibernate4Module() {
         return new Hibernate4Module();

@@ -30,7 +30,7 @@ public class HomeControllerTest {
 	public void testIndex() throws Exception {
 		mockMvc.perform(get("/"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("home/home"))
-			.andExpect(forwardedUrl("home/home"));
+			.andExpect(view().name("index"))
+			.andExpect(forwardedUrl("index"));
 	}
 }

@@ -1,38 +1,50 @@
 package it.aldi.app.config;
 
-import javax.inject.Inject;
-
+import it.aldi.app.service.BimbelUserDetailsService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
+
+import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    /**
-     * Create two in-memory users (user & admin).
-     */
-    @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("user").password("user").roles("USER").and()
-            .withUser("admin").password("admin").roles("ADMIN");
-    }
+
+    @NonNull
+    private BimbelUserDetailsService bimbelUserDetailsService;
+
+  /** Create two in-memory users (user & admin). */
+  @Inject
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(bimbelUserDetailsService)
+        .passwordEncoder(passwordEncoder())
+        .and()
+        .authenticationProvider(authenticationProvider());
+  }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/**").permitAll()
+            .antMatchers("/").permitAll()
             .and()
             .authorizeRequests()
-            .antMatchers("/css/**", "/js/**").permitAll()
+            .antMatchers("/resources/static/**").permitAll()
             .and()
             .formLogin()
             .loginPage("/signin")
@@ -43,7 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutUrl("/logout")
             .logoutSuccessUrl("/?logout")
             .deleteCookies("JSESSIONID")
-            .permitAll();
+            .permitAll()
+            .and()
+            .sessionManagement()
+            .maximumSessions(1)
+            .maxSessionsPreventsLogin(true);
     }
 
     @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
@@ -52,5 +68,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         public GlobalSecurityConfiguration() {
         }
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider daoAuthenticationProvider =
+            new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(bimbelUserDetailsService);
+        return daoAuthenticationProvider;
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+      return new HttpSessionEventPublisher();
     }
 }

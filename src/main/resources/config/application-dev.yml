@@ -15,10 +15,16 @@ spring:
         show_sql: true
         generate-ddl: false
         hibernate:
-            ddl-auto: none
+            ddl-auto: update
         properties:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
+liquibase:
+    change-log: classpath:/config/liquibase/master.xml
+    user: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/sample
+    contexts: development, production

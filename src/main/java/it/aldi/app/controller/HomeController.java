@@ -19,6 +19,6 @@ public class HomeController {
 	public String index() {
 		logger.info("Showing home page");
 
-		return "home/home";
+		return "index";
 	}
 }

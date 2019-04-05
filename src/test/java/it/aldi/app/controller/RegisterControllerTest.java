@@ -1,10 +1,12 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.Application;
+import it.aldi.app.service.BimbelUserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -20,9 +22,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RegisterControllerTest {
     private MockMvc mockMvc;
 
+    @MockBean
+    private BimbelUserService bimbelUserService;
+
     @Before
     public void setup() {
-        RegisterController registerController = new RegisterController();
+        RegisterController registerController = new RegisterController(bimbelUserService);
         this.mockMvc = MockMvcBuilders.standaloneSetup(registerController).build();
     }
 

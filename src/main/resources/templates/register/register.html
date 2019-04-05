@@ -1,33 +1,257 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<html lang="zxx" class="no-js"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png" th:href="@{/v2/img/fav.png}"/>
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer"/>
+    <!-- Meta Description -->
+    <meta name="description" content=""/>
+    <!-- Meta Keyword -->
+    <meta name="keywords" content=""/>
+    <!-- meta character set -->
+    <meta charset="UTF-8"/>
+    <!-- Site Title -->
+    <title>Bimbel Listing</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+          rel="stylesheet"/>
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet"
+          href="css/linearicons.css"
+          th:href="@{/v2/css/linearicons.css}"/>
+    <link rel="stylesheet"
+          href="css/font-awesome.min.css"
+          th:href="@{/v2/css/font-awesome.min.css}"/>
+    <link rel="stylesheet"
+          href="css/bootstrap.css"
+          th:href="@{/v2/css/bootstrap.css}"/>
+    <link rel="stylesheet"
+          href="css/magnific-popup.css"
+          th:href="@{/v2/css/magnific-popup.css}"/>
+    <link rel="stylesheet"
+          href="css/nice-select.css"
+          th:href="@{/v2/css/nice-select.css}"/>
+    <link rel="stylesheet"
+          href="css/animate.min.css"
+          th:href="@{/v2/css/animate.min.css}"/>
+    <link rel="stylesheet"
+          href="css/owl.carousel.css"
+          th:href="@{/v2/css/owl.carousel.css}"/>
+    <link rel="stylesheet" href="css/main.css" th:href="@{/v2/css/main.css}"/>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="card bg-light">
-        <div class="card-header">
-            Register
-        </div>
-        <div class="card-body">
-            <form>
-                <div class="form-group row">
-                    <label for="full_name" class="col-md-4 col-form-label text-md-right">Full Name</label>
-                    <div class="col-md-6">
-                        <input type="text" id="full_name" class="form-control" name="full-name" />
-                    </div>
-                </div>
 
-                <div class="form-group row">
-                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Email Address</label>
-                    <div class="col-md-6">
-                        <input type="text" id="email_address" class="form-control" name="email-address" />
-                    </div>
-                </div>
-            </form>
+<header id="header">
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a
+                    href="index.html"><img src="img/o4.png" alt="" title=""
+                                           th:src="@{/v2/img/o4.png}"/></a>
+                BIMBEL LISTING
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+
+                    <li><a class="ticker-btn" href="#">Signup</a></li>
+                    <li><a class="ticker-btn" href="#">Login</a></li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
         </div>
     </div>
-</div>
+</header><!-- #header -->
+
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row search-page-top d-flex align-items-center justify-content-center">
+            <div class="banner-content col-lg-12">
+                <h1 class="text-white">
+                    Register Form
+                </h1>
+                <p class="text-white link-nav">
+                    <a href="index.html">Home </a>
+                    <span class="lnr lnr-arrow-right"></span>
+                    <a href="search.html"> Register page</a>
+                </p>
+                <form th:action="${@routes.REGISTER}" class="serach-form-area"
+                      method="post">
+
+                    <div class="input-container">
+
+                        <input class="input-field"
+                               type="text"
+                               placeholder="Name"
+                               name="name"/>
+                    </div>
+
+                    <div class="input-container">
+
+                        <input class="input-field"
+                               type="text"
+                               placeholder="Username"
+                               name="username"/>
+                    </div>
+                    <br/>
+                    <div class="input-container">
+
+                        <input class="input-field"
+                               type="text"
+                               placeholder="Email"
+                               name="email"/>
+                    </div>
+                    <br/>
+                    <div class="input-container">
+                        <div class="default-select" id="default-selects">
+                            <select>
+                                <option value="1">Account Type</option>
+                                <option value="2">Student</option>
+                                <option value="3">Tutor</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="input-container">
+
+                        <input class="input-field"
+                               type="password"
+                               placeholder="Password"
+                               name="password"/>
+                    </div>
+                    <br/>
+                    <div class="input-container">
+
+                        <input class="input-field"
+                               type="password"
+                               placeholder="Confirm Password"/>
+                    </div>
+
+
+                    <br/>
+                    <button type="submit" class="btn">Register</button>
+                    <button type="submit" class="btn">Forgot Password?</button>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+
+<!-- start footer Area -->
+<footer class="footer-area section-gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  col-md-12">
+                <div class="single-footer-widget">
+                    <h6>Our Organization</h6>
+                    <ul class="footer-nav">
+                        <li><a href="#">Affiliate Website</a></li>
+                        <li><a href="#">Bimbel Partners</a></li>
+                        <li><a href="#">Promos</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6  col-md-12">
+                <div class="single-footer-widget newsletter">
+                    <h6>Newsletter</h6>
+                    <p>You can trust us. we only send promo offers, not a single
+                        spam.</p>
+                    <div id="mc_embed_signup">
+                        <form target="_blank"
+                              novalidate="true"
+                              action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                              method="get"
+                              class="form-inline">
+
+                            <div class="form-group row" style="width: 100%">
+                                <div class="col-lg-8 col-md-12">
+                                    <input name="EMAIL"
+                                           placeholder="Enter Email"
+                                           onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter Email '"
+                                           required=""
+                                           type="email"/>
+                                    <div style="position: absolute; left: -5000px;">
+                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a"
+                                               tabindex="-1"
+                                               value=""
+                                               type="text"/>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-12">
+                                    <button class="nw-btn primary-btn">Subscribe<span
+                                        class="lnr lnr-arrow-right"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="info"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row footer-bottom d-flex justify-content-between">
+            <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;<script>document.write(
+              new Date().getFullYear());</script>
+                All rights reserved | This template is made with
+                <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+            <div class="col-lg-4 col-sm-12 footer-social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-behance"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End footer Area -->
+
+<script src="js/vendor/jquery-2.2.4.min.js"
+        th:src="@{/v2/js/vendor/jquery-2.2.4.min.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="js/vendor/bootstrap.min.js"
+        th:src="@{/v2/js/vendor/bootstrap.min.js}"></script>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+<script src="js/easing.min.js" th:src="@{/v2/js/easing.min.js}"></script>
+<script src="js/hoverIntent.js" th:src="@{/v2/js/hoverIntent.js}"></script>
+<script src="js/superfish.min.js" th:src="@{/v2/js/superfish.min.js}"></script>
+<script src="js/jquery.ajaxchimp.min.js"
+        th:src="@{/v2/js/jquery.ajaxchimp.min.js}"></script>
+<script src="js/jquery.magnific-popup.min.js"
+        th:src="@{/v2/js/jquery.magnific-popup.min.js}"></script>
+<script src="js/owl.carousel.min.js"
+        th:src="@{/v2/js/owl.carousel.min.js}"></script>
+<script src="js/jquery.sticky.js" th:src="@{/v2/js/jquery.sticky.js}"></script>
+<script src="js/jquery.nice-select.min.js"
+        th:src="@{/v2/js/jquery.nice-select.min.js}"></script>
+<script src="js/parallax.min.js" th:src="@{/v2/js/parallax.min.js}"></script>
+<script src="js/mail-script.js" th:src="@{/v2/js/mail-script.js}"></script>
+<script src="js/main.js" th:src="@{/v2/js/main.js}"></script>
 </body>
 </html>
+
+
+

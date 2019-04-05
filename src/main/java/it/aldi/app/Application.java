@@ -48,7 +48,7 @@ public class Application {
         // Check if the selected profile has been set as argument.
         // If not, the development profile will be used.
         addDefaultProfile(app, source);
-        addLiquibaseScanPackages();
+//        addLiquibaseScanPackages();
         Environment env = app.run(args).getEnvironment();
         log.info("Access URLs:\n----------------------------------------------------------\n\t" +
             "Local: \t\thttp://127.0.0.1:{}\n\t" +

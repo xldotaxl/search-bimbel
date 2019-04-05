@@ -49,4 +49,11 @@ public interface BimbelUserService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get the bimbelUser based on id
+     * @param username the username of the entity
+     * @return the entity
+     */
+    BimbelUser findByUsername(String username);
 }

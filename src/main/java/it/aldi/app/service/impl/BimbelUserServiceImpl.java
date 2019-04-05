@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,5 +86,12 @@ public class BimbelUserServiceImpl implements BimbelUserService {
     public void delete(Long id) {
         log.debug("Request to delete BimbelUser : {}", id);
         bimbelUserRepository.delete(id);
+    }
+
+    @Override
+    public BimbelUser findByUsername(String username) {
+        log.debug("Request to get BimbelUser : {}", username);
+        return bimbelUserRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("user " + username + " not found"));
     }
 }
