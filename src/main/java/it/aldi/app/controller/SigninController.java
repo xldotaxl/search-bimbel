@@ -3,7 +3,7 @@ package it.aldi.app.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class SigninController {
@@ -12,7 +12,7 @@ public class SigninController {
     /**
      * Sign in page.
      */
-    @RequestMapping("/signin")
+    @GetMapping(Routes.SIGNIN)
     public String signin() {
         LOGGER.info("Showing sign in page");
 
