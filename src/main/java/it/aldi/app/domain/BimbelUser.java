@@ -2,6 +2,8 @@ package it.aldi.app.domain;
 
 import it.aldi.app.controller.dto.BimbelUserDto;
 import it.aldi.app.util.RegexConstant;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -17,7 +19,9 @@ import java.util.Set;
 /**
  * A BimbelUser.
  */
+@Builder
 @Entity
+@AllArgsConstructor
 @Table(name = "bimbel_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class BimbelUser implements Serializable {
@@ -62,6 +66,8 @@ public class BimbelUser implements Serializable {
         joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
+
+    private BimbelUser() {}
 
     private BimbelUser(BimbelUserDto bimbelUserDto) {
         username = bimbelUserDto.getUsername();
