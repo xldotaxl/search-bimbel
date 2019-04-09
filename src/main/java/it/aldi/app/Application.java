@@ -1,7 +1,6 @@
 package it.aldi.app;
 
 import it.aldi.app.config.Constants;
-import com.google.common.base.Joiner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
@@ -19,7 +18,7 @@ import java.util.Arrays;
 
 @SpringBootApplication
 public class Application {
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
     @Inject
     private Environment env;
@@ -30,12 +29,12 @@ public class Application {
     @PostConstruct
     public void initApplication() throws IOException {
         if (env.getActiveProfiles().length == 0) {
-            log.warn("No Spring profile configured, running with default configuration");
+            LOG.warn("No Spring profile configured, running with default configuration");
         } else {
-            log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
+            LOG.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
         }
     }
-                                                                                                                                                                         
+
     /**
      * Main method, used to run the application.
      */
@@ -48,9 +47,8 @@ public class Application {
         // Check if the selected profile has been set as argument.
         // If not, the development profile will be used.
         addDefaultProfile(app, source);
-//        addLiquibaseScanPackages();
         Environment env = app.run(args).getEnvironment();
-        log.info("Access URLs:\n----------------------------------------------------------\n\t" +
+        LOG.info("Access URLs:\n----------------------------------------------------------\n\t" +
             "Local: \t\thttp://127.0.0.1:{}\n\t" +
             "External: \thttp://{}:{}\n----------------------------------------------------------",
             env.getProperty("server.port"),
@@ -65,18 +63,5 @@ public class Application {
         if (!source.containsProperty("spring.profiles.active")) {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
-    }
-
-    /**
-     * Set the liquibases.scan.packages to avoid an exception from ServiceLocator.
-     */
-    private static void addLiquibaseScanPackages() {
-        System.setProperty("liquibase.scan.packages", Joiner.on(",").join(
-            "liquibase.change", "liquibase.database", "liquibase.parser",
-            "liquibase.precondition", "liquibase.datatype",
-            "liquibase.serializer", "liquibase.sqlgenerator", "liquibase.executor",
-            "liquibase.snapshot", "liquibase.logging", "liquibase.diff",
-            "liquibase.structure", "liquibase.structurecompare", "liquibase.lockservice",
-            "liquibase.ext", "liquibase.changelog"));
     }
 }

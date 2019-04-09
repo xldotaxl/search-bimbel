@@ -7,16 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class SigninController {
-	final Logger logger = LoggerFactory.getLogger(SigninController.class);
-	
-	/**
-	 * Sign in page.
-	 */
-	@RequestMapping("/signin")
-	public String signin() {
-		logger.info("Showing sign in page");
-		
-//		return "signin/signin";
-		return "signin/login";
-	}
+    private static final Logger LOGGER = LoggerFactory.getLogger(SigninController.class);
+
+    /**
+     * Sign in page.
+     */
+    @RequestMapping("/signin")
+    public String signin() {
+        LOGGER.info("Showing sign in page");
+
+        return "signin/login";
+    }
 }
