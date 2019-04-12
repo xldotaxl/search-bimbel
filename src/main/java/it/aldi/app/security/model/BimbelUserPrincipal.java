@@ -1,5 +1,6 @@
-package it.aldi.app.domain;
+package it.aldi.app.security.model;
 
+import it.aldi.app.domain.BimbelUser;
 import lombok.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

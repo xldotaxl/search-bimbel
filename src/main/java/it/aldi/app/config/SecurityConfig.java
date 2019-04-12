@@ -1,11 +1,12 @@
 package it.aldi.app.config;
 
-import it.aldi.app.service.BimbelUserDetailsService;
+import it.aldi.app.security.service.BimbelUserDetailsService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,8 +26,7 @@ import javax.inject.Inject;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @NonNull
-    private BimbelUserDetailsService bimbelUserDetailsService;
+    private @NonNull BimbelUserDetailsService bimbelUserDetailsService;
 
   /** Create two in-memory users (user & admin). */
   @Inject
@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider =
             new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());

@@ -1,6 +1,6 @@
-package it.aldi.app.service;
+package it.aldi.app.security.service;
 
-import it.aldi.app.domain.BimbelUserPrincipal;
+import it.aldi.app.security.model.BimbelUserPrincipal;
 import it.aldi.app.repository.BimbelUserRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BimbelUserDetailsService implements UserDetailsService {
 
-    @NonNull
-    private BimbelUserRepository bimbelUserRepository;
+    private @NonNull BimbelUserRepository bimbelUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
