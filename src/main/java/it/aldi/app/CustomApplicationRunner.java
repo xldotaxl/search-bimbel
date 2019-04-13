@@ -29,6 +29,12 @@ public final class CustomApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) {
+        if (bimbelUserRepository.count() < 1) {
+            insertInitialUser();
+        }
+    }
+
+    private void insertInitialUser() {
         List<BimbelUser> bimbelUsers = new ArrayList<>();
         bimbelUsers.add(BimbelUser.builder()
             .id(1L)
