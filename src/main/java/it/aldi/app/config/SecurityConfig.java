@@ -1,5 +1,7 @@
 package it.aldi.app.config;
 
+import it.aldi.app.controller.Routes;
+import it.aldi.app.security.CustomAccessDeniedHandler;
 import it.aldi.app.security.service.BimbelUserDetailsService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -16,35 +18,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-
-import javax.inject.Inject;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     private @NonNull BimbelUserDetailsService bimbelUserDetailsService;
-
-  /** Create two in-memory users (user & admin). */
-  @Inject
-  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(bimbelUserDetailsService)
-        .passwordEncoder(passwordEncoder())
-        .and()
-        .authenticationProvider(authenticationProvider());
-  }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
             .antMatchers("/").permitAll()
-            .and()
-            .authorizeRequests()
             .antMatchers("/resources/static/**").permitAll()
+            .antMatchers("/register/**").hasRole("ANONYMOUS")
             .and()
             .formLogin()
             .loginPage("/signin")
@@ -56,6 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logoutSuccessUrl("/?logout")
             .deleteCookies("JSESSIONID")
             .permitAll()
+            .and()
+            .exceptionHandling()
+            .accessDeniedHandler(accessDeniedHandler())
             .and()
             .sessionManagement()
             .maximumSessions(1)
@@ -84,8 +77,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(bimbelUserDetailsService)
+            .passwordEncoder(passwordEncoder())
+            .and()
+            .authenticationProvider(authenticationProvider());
+    }
+
     @Bean
     public HttpSessionEventPublisher httpSessionEventPublisher() {
-      return new HttpSessionEventPublisher();
+        return new HttpSessionEventPublisher();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return new CustomAccessDeniedHandler();
     }
 }
