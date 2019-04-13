@@ -1,51 +1,9 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js"
-      xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<!-- Mobile Specific Meta -->
-<meta name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-<!-- Favicon-->
-<link rel="shortcut icon" href="img/fav.png" th:href="@{/v2/img/fav.png}"/>
-<!-- Author Meta -->
-<meta name="author" content="codepixer"/>
-<!-- Meta Description -->
-<meta name="description" content=""/>
-<!-- Meta Keyword -->
-<meta name="keywords" content=""/>
-<!-- meta character set -->
-<meta charset="UTF-8"/>
-<!-- Site Title -->
-<title>Bimbel Listing</title>
-
-<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
-      rel="stylesheet"/>
-<!--
-CSS
-============================================= -->
-<head>
-    <link rel="stylesheet" href="css2/linearicons.css"
-          th:href="@{/v2/css/linearicons.css}"/>
-    <link rel="stylesheet"
-          href="css2/font-awesome.min.css"
-          th:href="@{/v2/css/font-awesome.min.css}"/>
-    <link rel="stylesheet"
-          href="css2/bootstrap.css"
-          th:href="@{/v2/css/bootstrap.css}"/>
-    <link rel="stylesheet"
-          href="css2/magnific-popup.css"
-          th:href="@{/v2/css/magnific-popup.css}"/>
-    <link rel="stylesheet"
-          href="css2/nice-select.css"
-          th:href="@{/v2/css/nice-select.css}"/>
-    <link rel="stylesheet"
-          href="css2/animate.min.css"
-          th:href="@{/v2/css/animate.min.css}"/>
-    <link rel="stylesheet"
-          href="css2/owl.carousel.css"
-          th:href="@{/v2/css/owl.carousel.css}"/>
-    <link rel="stylesheet" href="css2/main.css" th:href="@{/v2/css/main.css}"/>
+<head th:replace="fragments/header :: header-css(pageTitle='Bimbel Listing')">
 </head>
+
 <body>
 
 <header id="header">
@@ -82,45 +40,46 @@ CSS
                     <span>1500+</span> Bimbels
                 </h1>
                 <form action="search.html"
-                      class="serach-form-area"
-                      method="get"
+                      class="search-form-area"
+                      method="post"
                       th:action="${@routes.SEARCH}">
                     <div class="row justify-content-center form-wrap">
 
                         <div class="col-lg-3 form-cols">
-                            <div class="default-select"
-                                 id="default-selects2">
-                                <select>
-                                    <option value="1">Education Level
-                                    </option>
-                                    <option value="2">SD</option>
-                                    <option value="3">SMP</option>
-                                    <option value="4">SMA</option>
-                                    <option value="5">University Student
-                                    </option>
-                                </select>
+                            <div class="default-select education-level-wrapper">
+                                <label class="text-white">Education Level
+                                    <select class="text-black">
+                                        <option value="2">SD</option>
+                                        <option value="3">SMP</option>
+                                        <option value="4">SMA</option>
+                                        <option value="5">University Student
+                                        </option>
+                                    </select>
+                                </label>
                             </div>
                         </div>
                         <div class="col-lg-3 form-cols">
                             <div class="default-select" id="default-selects">
-                                <select>
-                                    <option value="1">Select Province</option>
-                                    <option value="2">Tangerang</option>
-                                    <option value="3">Jakarta</option>
-                                    <option value="4">Bandung</option>
-                                    <option value="5">Surabaya</option>
-                                </select>
+                                <label class="text-white">Select Province
+                                    <select class="text-black">
+                                        <option value="2">Tangerang</option>
+                                        <option value="3">Jakarta</option>
+                                        <option value="4">Bandung</option>
+                                        <option value="5">Surabaya</option>
+                                    </select>
+                                </label>
                             </div>
                         </div>
                         <div class="col-lg-3 form-cols">
                             <div class="default-select" id="default-selects2">
-                                <select>
-                                    <option value="1">Select Area</option>
-                                    <option value="2">Cikupa</option>
-                                    <option value="3">Kosambi</option>
-                                    <option value="4">Teluknaga</option>
-                                    <option value="5">Cisauk</option>
-                                </select>
+                                <label class="text-white">Select Area
+                                    <select class="text-black">
+                                        <option value="2">Cikupa</option>
+                                        <option value="3">Kosambi</option>
+                                        <option value="4">Teluknaga</option>
+                                        <option value="5">Cisauk</option>
+                                    </select>
+                                </label>
                             </div>
                         </div>
                         <div class="col-lg-2 form-cols">

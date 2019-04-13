@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header-css (pageTitle)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png"/>
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer"/>
+    <!-- Meta Description -->
+    <meta name="description" content=""/>
+    <!-- Meta Keyword -->
+    <meta name="keywords" content=""/>
+    <!-- meta character set -->
+    <meta charset="UTF-8"/>
+    <!-- Site Title -->
+    <title th:text="${pageTitle}"></title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
+          rel="stylesheet"/>
+    <!--
+    CSS
+    ============================================= -->
+    <link rel="stylesheet" href="css2/linearicons.css"
+          th:href="@{/v2/css/linearicons.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/webjars/font-awesome/5.8.1/css/fontawesome.min-jsf.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/v2/css/magnific-popup.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/v2/css/nice-select.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/v2/css/animate.min.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/v2/css/owl.carousel.css}"/>
+    <link rel="stylesheet"
+          th:href="@{/v2/css/main.css}"/>
+</head>
+</html>
