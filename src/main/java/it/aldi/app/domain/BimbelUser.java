@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -69,7 +70,8 @@ public class BimbelUser implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
-    private BimbelUser() {}
+    private BimbelUser() {
+    }
 
     private BimbelUser(BimbelUserDto bimbelUserDto) {
         username = bimbelUserDto.getUsername();
@@ -82,7 +84,12 @@ public class BimbelUser implements Serializable {
         return new BimbelUser(bimbelUserDto);
     }
 
-    public static BimbelUser empty() { return new BimbelUser();
+    public static BimbelUser from(BimbelUserDto bimbelUserDto, Set<Role> roles) {
+        return from(bimbelUserDto).roles(roles);
+    }
+
+    public static BimbelUser empty() {
+        return new BimbelUser();
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -147,53 +154,53 @@ public class BimbelUser implements Serializable {
     }
 
     public Set<Organization> getOrganizations() {
-        return organizations;
+        return Collections.unmodifiableSet(organizations);
     }
 
     public BimbelUser organizations(Set<Organization> organizations) {
-        this.organizations = organizations;
+        this.organizations = Collections.unmodifiableSet(organizations);
         return this;
     }
 
     public BimbelUser addOrganization(Organization organization) {
-        this.organizations.add(organization);
+        organizations.add(organization);
         organization.getBimbelUsers().add(this);
         return this;
     }
 
     public BimbelUser removeOrganization(Organization organization) {
-        this.organizations.remove(organization);
+        organizations.remove(organization);
         organization.getBimbelUsers().remove(this);
         return this;
     }
 
     public void setOrganizations(Set<Organization> organizations) {
-        this.organizations = organizations;
+        this.organizations = Collections.unmodifiableSet(organizations);
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return Collections.unmodifiableSet(roles);
     }
 
     public BimbelUser roles(Set<Role> roles) {
-        this.roles = roles;
+        this.roles = Collections.unmodifiableSet(roles);
         return this;
     }
 
     public BimbelUser addRole(Role role) {
-        this.roles.add(role);
+        roles.add(role);
         role.getBimbelUsers().add(this);
         return this;
     }
 
     public BimbelUser removeRole(Role role) {
-        this.roles.remove(role);
+        roles.remove(role);
         role.getBimbelUsers().remove(this);
         return this;
     }
 
     public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+        this.roles = Collections.unmodifiableSet(roles);
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -206,25 +213,22 @@ public class BimbelUser implements Serializable {
             return false;
         }
         BimbelUser bimbelUser = (BimbelUser) o;
-        if (bimbelUser.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), bimbelUser.getId());
+        return bimbelUser.id != null && id != null && Objects.equals(id, bimbelUser.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(id);
     }
 
     @Override
     public String toString() {
         return "BimbelUser{" +
-            "id=" + getId() +
-            ", username='" + getUsername() + "'" +
-            ", name='" + getName() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", email='" + getEmail() + "'" +
+            "id=" + id +
+            ", username='" + username + "'" +
+            ", name='" + name + "'" +
+            ", password='" + password + "'" +
+            ", email='" + email + "'" +
             "}";
     }
 }

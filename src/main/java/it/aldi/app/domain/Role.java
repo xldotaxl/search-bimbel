@@ -1,12 +1,13 @@
 package it.aldi.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import java.util.Set;
  * A Role.
  */
 @Entity
+@AllArgsConstructor
 @Table(name = "role")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Role implements Serializable {
@@ -30,14 +32,26 @@ public class Role implements Serializable {
     @ManyToMany(mappedBy = "roles")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
-    private Set<BimbelUser> bimbelUsers = new HashSet<>();
+    private Set<BimbelUser> bimbelUsers;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "role_privilege",
-               joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
-    private Set<Privilege> privileges = new HashSet<>();
+        joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
+    private Set<Privilege> privileges;
+
+    private Role() {
+    }
+
+    private Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public static Role valueOf(Long id, String name) {
+        return new Role(id, name);
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -62,53 +76,53 @@ public class Role implements Serializable {
     }
 
     public Set<BimbelUser> getBimbelUsers() {
-        return bimbelUsers;
+        return Collections.unmodifiableSet(bimbelUsers);
     }
 
     public Role bimbelUsers(Set<BimbelUser> bimbelUsers) {
-        this.bimbelUsers = bimbelUsers;
+        this.bimbelUsers = Collections.unmodifiableSet(bimbelUsers);
         return this;
     }
 
     public Role addBimbelUser(BimbelUser bimbelUser) {
-        this.bimbelUsers.add(bimbelUser);
+        bimbelUsers.add(bimbelUser);
         bimbelUser.getRoles().add(this);
         return this;
     }
 
     public Role removeBimbelUser(BimbelUser bimbelUser) {
-        this.bimbelUsers.remove(bimbelUser);
+        bimbelUsers.remove(bimbelUser);
         bimbelUser.getRoles().remove(this);
         return this;
     }
 
     public void setBimbelUsers(Set<BimbelUser> bimbelUsers) {
-        this.bimbelUsers = bimbelUsers;
+        this.bimbelUsers = Collections.unmodifiableSet(bimbelUsers);
     }
 
     public Set<Privilege> getPrivileges() {
-        return privileges;
+        return Collections.unmodifiableSet(privileges);
     }
 
     public Role privileges(Set<Privilege> privileges) {
-        this.privileges = privileges;
+        this.privileges = Collections.unmodifiableSet(privileges);
         return this;
     }
 
     public Role addPrivilege(Privilege privilege) {
-        this.privileges.add(privilege);
+        privileges.add(privilege);
         privilege.getRoles().add(this);
         return this;
     }
 
     public Role removePrivilege(Privilege privilege) {
-        this.privileges.remove(privilege);
+        privileges.remove(privilege);
         privilege.getRoles().remove(this);
         return this;
     }
 
     public void setPrivileges(Set<Privilege> privileges) {
-        this.privileges = privileges;
+        this.privileges = Collections.unmodifiableSet(privileges);
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -121,22 +135,19 @@ public class Role implements Serializable {
             return false;
         }
         Role role = (Role) o;
-        if (role.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), role.getId());
+        return role.id != null && id != null && Objects.equals(id, role.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(getId());
+        return Objects.hashCode(id);
     }
 
     @Override
     public String toString() {
         return "Role{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
+            "id=" + id +
+            ", name='" + name + "'" +
             "}";
     }
 }
