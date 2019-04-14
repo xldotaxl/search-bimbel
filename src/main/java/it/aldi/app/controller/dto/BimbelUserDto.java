@@ -16,12 +16,12 @@ public class BimbelUserDto {
 
     @NotNull
     @Size(min = 6)
-    @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z.]*[a-zA-Z]+$",
+    @Pattern(regexp = RegexConstant.USERNAME_REGEX,
         message = "Username should only contain alphabet (may separated by dot(.)")
     private String username;
 
     @NotNull
-    @Pattern(regexp = "^[a-z A-Z]*$", message = "Name should only contain alphabet")
+    @Pattern(regexp = RegexConstant.NAME_REGEX, message = "Name should only contain alphabet")
     private String name;
 
     @NotNull

@@ -35,12 +35,12 @@ public class BimbelUser implements Serializable {
 
     @NotNull
     @Size(min = 6)
-    @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z.]*[a-zA-Z]+$")
+    @Pattern(regexp = RegexConstant.USERNAME_REGEX)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @NotNull
-    @Pattern(regexp = "^[a-z A-Z]*$")
+    @Pattern(regexp = RegexConstant.NAME_REGEX)
     @Column(name = "name", nullable = false)
     private String name;
 
