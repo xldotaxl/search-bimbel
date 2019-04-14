@@ -1,6 +1,5 @@
 package it.aldi.app.controller.dto;
 
-import it.aldi.app.domain.enums.RoleEnum;
 import it.aldi.app.util.RegexConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,5 +33,5 @@ public class BimbelUserDto {
     private String email;
 
     @NotNull
-    private RoleEnum roles;
+    private Integer roles;
 }
