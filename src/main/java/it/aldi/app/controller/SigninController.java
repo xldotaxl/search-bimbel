@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class SigninController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SigninController.class);
 
+    private static final String SIGN_IN_VIEW = "signin/login";
+
     /**
      * Sign in page.
      */
@@ -18,6 +20,6 @@ public class SigninController {
     public String signin(@ModelAttribute BimbelUserDto bimbelUserDto) {
         LOGGER.info("Showing sign in page");
 
-        return "signin/login";
+        return SIGN_IN_VIEW;
     }
 }

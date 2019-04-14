@@ -12,13 +12,13 @@ public class HomeController {
 
     private final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
+    private static final String HOME_VIEW = "home/home";
+
     /**
      * Show home page.
      */
     @GetMapping
     public String index() {
-        logger.info("Showing home page");
-
-        return "home/home";
+        return HOME_VIEW;
     }
 }
