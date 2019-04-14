@@ -2,6 +2,7 @@ package it.aldi.app.controller;
 
 import it.aldi.app.controller.dto.BimbelUserDto;
 import it.aldi.app.domain.BimbelUser;
+import it.aldi.app.domain.enums.RoleEnum;
 import it.aldi.app.service.BimbelUserService;
 import it.aldi.app.util.ErrorMsgConstant;
 import lombok.NonNull;
@@ -34,6 +35,7 @@ public class RegisterController {
     @GetMapping(Routes.REGISTER)
     public String viewRegisterPage(Model model) {
         model.addAttribute(new BimbelUserDto());
+        model.addAttribute("roleList", RoleEnum.excludeSuperAdmin());
         return REGISTER_VIEW;
     }
 
