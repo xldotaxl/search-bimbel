@@ -1,52 +1,10 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js"
+<html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png"/>
-    <!-- Author Meta -->
-    <meta name="author" content="codepixer"/>
-    <!-- Meta Description -->
-    <meta name="description" content=""/>
-    <!-- Meta Keyword -->
-    <meta name="keywords" content=""/>
-    <!-- meta character set -->
-    <meta charset="UTF-8"/>
-    <!-- Site Title -->
-    <title>Bimbel Listing</title>
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
-          rel="stylesheet"/>
-    <!--
-    CSS
-    ============================================= -->
-    <link rel="stylesheet"
-          href="css/linearicons.css"
-          th:href="@{/v2/css/linearicons.css}"/>
-    <link rel="stylesheet"
-          href="css/font-awesome.min.css"
-          th:href="@{/v2/css/font-awesome.min.css}"/>
-    <link rel="stylesheet"
-          href="css/bootstrap.css"
-          th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
-    <link rel="stylesheet"
-          href="css/magnific-popup.css"
-          th:href="@{/v2/css/magnific-popup.css}"/>
-    <link rel="stylesheet"
-          href="css/nice-select.css"
-          th:href="@{/v2/css/nice-select.css}"/>
-    <link rel="stylesheet"
-          href="css/animate.min.css"
-          th:href="@{/v2/css/animate.min.css}"/>
-    <link rel="stylesheet"
-          href="css/owl.carousel.css"
-          th:href="@{/v2/css/owl.carousel.css}"/>
-    <link rel="stylesheet" href="css/main.css" th:href="@{/v2/css/main.css}"/>
+<head th:replace="fragments/header :: header-css(pageTitle='Bimbel Listing')">
 </head>
+
 <body>
 
 <header id="header">
@@ -61,8 +19,13 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
 
-                    <li><a class="ticker-btn" href="#">Signup</a></li>
-                    <li><a class="ticker-btn" href="#">Login</a></li>
+                    <li><a class="ticker-btn" href="#"
+                           th:href="${@routes.REGISTER}">Signup
+                    </a></li>
+                    <li><a class="ticker-btn"
+                           href="#"
+                           th:href="${@routes.SIGNIN}">
+                        Login</a></li>
                 </ul>
             </nav><!-- #nav-menu-container -->
         </div>
@@ -97,43 +60,53 @@
 
                     <div class="input-container">
 
-                        <input class="input-field"
-                               type="text"
-                               placeholder="Username"
-                               name="username"/>
+                        <label>Username
+                            <input class="input-field"
+                                   type="text"
+                                   placeholder="Username"
+                                   name="username"/>
+                        </label>
                     </div>
                     <br/>
                     <div class="input-container">
 
-                        <input class="input-field"
-                               type="text"
-                               placeholder="Email"
-                               name="email"/>
+                        <label>Email
+                            <input class="input-field"
+                                   type="text"
+                                   placeholder="Email"
+                                   name="email"/>
+                        </label>
                     </div>
                     <br/>
                     <div class="input-container">
                         <div class="default-select" id="default-selects">
-                            <select>
-                                <option value="1">Account Type</option>
-                                <option value="2">Student</option>
-                                <option value="3">Tutor</option>
-                            </select>
+                            <label>Register as
+                                <select>
+                                    <option value="1">Account Type</option>
+                                    <option value="2">Student</option>
+                                    <option value="3">Tutor</option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                     <br/>
                     <div class="input-container">
 
-                        <input class="input-field"
-                               type="password"
-                               placeholder="Password"
-                               name="password"/>
+                        <label>Password
+                            <input class="input-field"
+                                   type="password"
+                                   placeholder="Password"
+                                   name="password"/>
+                        </label>
                     </div>
                     <br/>
                     <div class="input-container">
 
-                        <input class="input-field"
-                               type="password"
-                               placeholder="Confirm Password"/>
+                        <label>Password
+                            <input class="input-field"
+                                   type="password"
+                                   placeholder="Confirm Password"/>
+                        </label>
                     </div>
 
 
