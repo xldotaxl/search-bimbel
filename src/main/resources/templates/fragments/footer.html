@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+
+<div th:fragment="footer">
+    <hr/>
+    <div id="userinfo">
+        <div sec:authorize="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')">
+            <span th:text="#{label_welcome} + ', ' + ${#authentication.name}">Welcome, Bob</span>
+        </div>
+    </div>
+
+    <div>
+        <a th:href="@{/}" th:text="#{home_text}">Home</a> |
+        <a th:href="@{?lang=en}"
+           th:text="#{label_en_CA}">English</a> |
+    </div>
+</div>
+
+</body>
+</html>
