@@ -1,8 +1,7 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.Application;
-import it.aldi.app.service.BimbelUserService;
-import it.aldi.app.util.ErrorMsgConstant;
+import it.aldi.app.service.register.RegisterService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,14 +24,11 @@ public class RegisterControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private BimbelUserService bimbelUserService;
-
-    @MockBean
-    private ErrorMsgConstant errorMsgConstant;
+    private RegisterService registerService;
 
     @Before
     public void setup() {
-        RegisterController registerController = new RegisterController(bimbelUserService, errorMsgConstant);
+        RegisterController registerController = new RegisterController(registerService);
         mockMvc = MockMvcBuilders.standaloneSetup(registerController).build();
     }
 

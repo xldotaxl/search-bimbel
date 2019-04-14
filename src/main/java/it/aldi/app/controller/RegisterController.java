@@ -1,10 +1,7 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.controller.dto.BimbelUserDto;
-import it.aldi.app.domain.BimbelUser;
-import it.aldi.app.domain.enums.RoleEnum;
-import it.aldi.app.service.BimbelUserService;
-import it.aldi.app.util.ErrorMsgConstant;
+import it.aldi.app.service.register.RegisterService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,14 +25,12 @@ public class RegisterController {
 
     private static final String REGISTER_VIEW = "register/register";
 
-    private final @NonNull BimbelUserService bimbelUserService;
-
-    private final @NonNull ErrorMsgConstant errorMsgConstant;
+    private final @NonNull RegisterService registerService;
 
     @GetMapping(Routes.REGISTER)
     public String viewRegisterPage(Model model) {
         model.addAttribute(new BimbelUserDto());
-        model.addAttribute("roleList", RoleEnum.excludeSuperAdmin());
+        model.addAttribute("roleList", registerService.getRolesList());
         return REGISTER_VIEW;
     }
 
@@ -47,35 +42,24 @@ public class RegisterController {
             return wrongInputModelView(bimbelUserDto);
         }
 
-        String errorMsg = verifyExistingData(bimbelUserDto);
+        String errorMsg = registerService.verifyExistingData(bimbelUserDto);
         if (!errorMsg.isEmpty()) {
             return dataExistsModelView(bindingResult, errorMsg);
         }
 
-        BimbelUser bimbelUser = BimbelUser.from(bimbelUserDto);
-        bimbelUserService.save(bimbelUser);
+        registerService.registerUser(bimbelUserDto);
 
         return new ModelAndView(redirect() + Routes.SIGNIN);
     }
 
     private static ModelAndView dataExistsModelView(BindingResult bindingResult, String errorMsg) {
-        log.error("Failed registration, cause: {}", errorMsg);
+        log.warn("Failed registration, cause: {}", errorMsg);
         bindingResult.reject(errorMsg);
         return new ModelAndView(REGISTER_VIEW, "errMsg", errorMsg);
     }
 
     private static ModelAndView wrongInputModelView(@ModelAttribute @Valid BimbelUserDto bimbelUserDto) {
-        log.error("There's an error occured when user register");
+        log.warn("There's an error occured when user register");
         return new ModelAndView(REGISTER_VIEW, "bimbelUserDto", bimbelUserDto);
-    }
-
-    private String verifyExistingData(BimbelUserDto bimbelUserDto) {
-        if (bimbelUserService.findByUsername(bimbelUserDto.getUsername()) != null) {
-            return errorMsgConstant.getEmailExists();
-        }
-        if (bimbelUserService.findByEmail(bimbelUserDto.getEmail()) != null) {
-            return errorMsgConstant.getUsernameExists();
-        }
-        return "";
     }
 }
