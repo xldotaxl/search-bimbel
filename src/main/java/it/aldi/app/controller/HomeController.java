@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class HomeController {
 
-	private final Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
-	/**
-	 * Show home page.
+    /**
+     * Show home page.
      */
-	@GetMapping
-	public String index() {
-		logger.info("Showing home page");
+    @GetMapping
+    public String index() {
+        logger.info("Showing home page");
 
-		return "index";
-	}
+        return "home/home";
+    }
 }
