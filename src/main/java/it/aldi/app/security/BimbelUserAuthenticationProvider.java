@@ -1,15 +1,12 @@
 package it.aldi.app.security;
 
 import it.aldi.app.domain.BimbelUser;
-import it.aldi.app.service.BimbelUserService;
+import it.aldi.app.service.domain.BimbelUserService;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 //@Component
 //@RequiredArgsConstructor(onConstructor = @__(@Autowired))

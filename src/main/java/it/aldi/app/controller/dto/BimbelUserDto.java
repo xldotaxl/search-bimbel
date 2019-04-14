@@ -33,5 +33,5 @@ public class BimbelUserDto {
     private String email;
 
     @NotNull
-    private Integer roles;
+    private String roles;
 }

@@ -30,7 +30,7 @@ public class RegisterController {
     @GetMapping(Routes.REGISTER)
     public String viewRegisterPage(Model model) {
         model.addAttribute(new BimbelUserDto());
-        model.addAttribute("roleList", registerService.getRolesList());
+        model.addAttribute("roleList", registerService.getPublicRoles());
         return REGISTER_VIEW;
     }
 

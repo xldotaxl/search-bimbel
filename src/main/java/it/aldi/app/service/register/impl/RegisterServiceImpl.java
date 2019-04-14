@@ -9,14 +9,15 @@ import it.aldi.app.service.register.RegisterService;
 import it.aldi.app.util.ErrorMsgConstant;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
     private static final String SUPER_ADMIN = "SUPER_ADMIN";
+    private static final String OWNER = "OWNER";
 
     private ErrorMsgConstant errorMsgConstant;
 
@@ -33,13 +34,13 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public BimbelUser registerUser(BimbelUserDto bimbelUserDto) {
-        Set<Role> assignedRoles = getAssignedRoles(bimbelUserDto);
-        BimbelUser bimbelUser = BimbelUser.from(bimbelUserDto).roles(assignedRoles);
+        Set<Role> assignedRoles = assignRoles(bimbelUserDto);
+        BimbelUser bimbelUser = BimbelUser.from(bimbelUserDto, assignedRoles);
         return bimbelUserService.save(bimbelUser);
     }
 
     @Override
-    public List<Role> getRolesList() {
+    public List<Role> getPublicRoles() {
         return roleService.findAll().stream()
             .filter(role -> !SUPER_ADMIN.equalsIgnoreCase(role.getName()))
             .collect(Collectors.toList());
@@ -56,10 +57,31 @@ public class RegisterServiceImpl implements RegisterService {
         return "";
     }
 
-    private Set<Role> getAssignedRoles(BimbelUserDto bimbelUserDto) {
+    private Set<Role> assignRoles(BimbelUserDto bimbelUserDto) {
         List<Role> availableRoles = roleService.findAll();
+        switch (bimbelUserDto.getRoles()) {
+            case SUPER_ADMIN:
+                return everyRoles(availableRoles);
+            case OWNER:
+                return nonSuperAdminRoles(availableRoles);
+            default:
+                return singleRole(bimbelUserDto, availableRoles);
+        }
+    }
+
+    private static Set<Role> singleRole(BimbelUserDto bimbelUserDto, List<Role> availableRoles) {
         return availableRoles.stream()
-            .filter(role -> role.getId() >= bimbelUserDto.getRoles())
+            .filter(role -> role.getName().equalsIgnoreCase(bimbelUserDto.getRoles()))
             .collect(Collectors.toSet());
+    }
+
+    private static Set<Role> nonSuperAdminRoles(List<Role> availableRoles) {
+        return availableRoles.stream()
+            .filter(role -> !role.getName().equalsIgnoreCase(SUPER_ADMIN))
+            .collect(Collectors.toSet());
+    }
+
+    private static Set<Role> everyRoles(List<Role> availableRoles) {
+        return new HashSet<>(availableRoles);
     }
 }

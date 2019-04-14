@@ -9,7 +9,7 @@ import java.util.List;
 public interface RegisterService {
     BimbelUser registerUser(BimbelUserDto bimbelUserDto);
 
-    List<Role> getRolesList();
+    List<Role> getPublicRoles();
 
     String verifyExistingData(BimbelUserDto bimbelUserDto);
 }

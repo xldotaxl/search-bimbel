@@ -77,7 +77,7 @@
                     <select class="form-control" id="role-input"
                             th:field="*{roles}">
                         <option th:each="role : ${roleList}"
-                                th:value="${role.getId()}"
+                                th:value="${role.getName()}"
                                 th:text="${role.getName()}"></option>
                     </select>
                 </div>
