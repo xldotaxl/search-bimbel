@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -18,19 +19,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @Transactional
 public class SigninControllerTest {
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		SigninController signinController = new SigninController();
-		this.mockMvc = MockMvcBuilders.standaloneSetup(signinController).build();
-	}
+    @Before
+    public void setup() {
+        SigninController signinController = new SigninController();
+        mockMvc = MockMvcBuilders.standaloneSetup(signinController).build();
+    }
 
-	@Test
-	public void testSignin() throws Exception {
-		mockMvc.perform(get("/signin"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("signin/login"))
-			.andExpect(forwardedUrl("signin/login"));
-	}
+    @Test
+    @WithAnonymousUser
+    public void testSignin() throws Exception {
+        mockMvc.perform(get("/signin"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("signin/login"))
+            .andExpect(forwardedUrl("signin/login"));
+    }
 }
