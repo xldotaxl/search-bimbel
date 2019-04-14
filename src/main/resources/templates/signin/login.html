@@ -18,6 +18,7 @@
                 <label for="username-input" class="col-3">Username</label>
                 <div class="col-6">
                     <input type="text" class="form-control" id="username-input"
+                           required="required"
                            th:placeholder="#{placeholder-username}"
                            th:field="*{username}"/>
                 </div>
@@ -28,6 +29,7 @@
                     <input type="password"
                            class="form-control"
                            id="password-input"
+                           required="required"
                            th:placeholder="#{placeholder-password}"
                            th:field="*{password}"/>
                 </div>
