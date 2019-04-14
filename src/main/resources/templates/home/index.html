@@ -45,15 +45,19 @@
 
     <h3 th:text="#{label_credential_header}">Current Credientials</h3>
     <div sec:authorize="hasRole('ROLE_ANONYMOUS')">
-        <p th:utext="#{message_anonymous}">You are currently signed in as an anonymous user.</p>
+        <p th:utext="#{message-anonymous}">
+            You are currently signed in as an anonymous user.
+        </p>
     </div>
 
     <div sec:authorize="hasRole('ROLE_USER')">
-        <p th:utext="#{message_user}">You are currently signed in as a user.</p>
+        <p th:utext="#{message-user}">You are currently signed in as a user.</p>
     </div>
 
     <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <p th:utext="#{message_admin}">You are currently signed in as the administrator.</p>
+        <p th:utext="#{message-admin}">
+            You are currently signed in as the administrator.
+        </p>
     </div>
 
     <div th:replace="fragments/footer :: footer">Footer</div>

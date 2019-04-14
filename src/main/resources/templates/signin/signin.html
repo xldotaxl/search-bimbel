@@ -33,12 +33,14 @@
 				</div>
 			</fieldset>
 			<div th:if="${param.error}" class="warning">
-				<p th:text="#{message_login_fail}">Login failed, please try again.</p>
+				<p th:text="#{message-login-fail}">
+					Login failed, please try again.
+				</p>
 			</div>
 		</form>
 
 		<p style="text-align:center;">
-			User account = <i>user &amp; user</i> <br/> 
+			User account = <i>user &amp; user</i> <br/>
 			Admin account = <i>admin &amp; admin</i>
 		</p>
 
