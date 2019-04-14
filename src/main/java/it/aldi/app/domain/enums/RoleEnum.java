@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum RoleEnum {
-    SUPERADMIN, ADMIN, STUDENT, TUTOR;
+    SUPERADMIN, OWNER, STUDENT, TUTOR;
 
     public static List<String> excludeSuperAdmin() {
         return Stream.of(RoleEnum.values())
