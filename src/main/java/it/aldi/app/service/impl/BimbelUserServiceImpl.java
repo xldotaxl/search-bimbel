@@ -1,14 +1,17 @@
 package it.aldi.app.service.impl;
 
+import it.aldi.app.exception.EntityNotFoundException;
 import it.aldi.app.service.BimbelUserService;
 import it.aldi.app.domain.BimbelUser;
 import it.aldi.app.repository.BimbelUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +29,11 @@ public class BimbelUserServiceImpl implements BimbelUserService {
 
     private final BimbelUserRepository bimbelUserRepository;
 
-    public BimbelUserServiceImpl(BimbelUserRepository bimbelUserRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public BimbelUserServiceImpl(BimbelUserRepository bimbelUserRepository, PasswordEncoder passwordEncoder) {
         this.bimbelUserRepository = bimbelUserRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -39,7 +45,8 @@ public class BimbelUserServiceImpl implements BimbelUserService {
     @Override
     public BimbelUser save(BimbelUser bimbelUser) {
         log.debug("Request to save BimbelUser : {}", bimbelUser);
-        return bimbelUserRepository.save(bimbelUser);
+        String encodedPassword = passwordEncoder.encode(bimbelUser.getPassword());
+        return bimbelUserRepository.save(bimbelUser.withPassword(encodedPassword));
     }
 
     /**
@@ -59,10 +66,11 @@ public class BimbelUserServiceImpl implements BimbelUserService {
      *
      * @return the list of entities
      */
+    @Override
     public Page<BimbelUser> findAllWithEagerRelationships(Pageable pageable) {
         return bimbelUserRepository.findAllWithEagerRelationships(pageable);
     }
-    
+
 
     /**
      * Get one bimbelUser by id.
@@ -92,6 +100,13 @@ public class BimbelUserServiceImpl implements BimbelUserService {
     public BimbelUser findByUsername(String username) {
         log.debug("Request to get BimbelUser : {}", username);
         return bimbelUserRepository.findByUsername(username)
-            .orElseThrow(() -> new UsernameNotFoundException("user " + username + " not found"));
+            .orElse(null);
+    }
+
+    @Override
+    public BimbelUser findByEmail(String email) {
+        log.debug("Request to get BimbelUser : {}", email);
+        return bimbelUserRepository.findByEmail(email)
+            .orElse(null);
     }
 }

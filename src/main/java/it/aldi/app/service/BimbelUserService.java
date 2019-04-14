@@ -34,7 +34,7 @@ public interface BimbelUserService {
      * @return the list of entities
      */
     Page<BimbelUser> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" bimbelUser.
      *
@@ -56,4 +56,12 @@ public interface BimbelUserService {
      * @return the entity
      */
     BimbelUser findByUsername(String username);
+
+    /**
+     * Get the bimbelUser based on email
+     * @param email the email of the entity
+     * @return the entity
+     */
+    BimbelUser findByEmail(String email);
+
 }
