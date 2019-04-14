@@ -4,6 +4,7 @@ import it.aldi.app.controller.dto.BimbelUserDto;
 import it.aldi.app.util.RegexConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.experimental.Wither;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -43,6 +44,7 @@ public class BimbelUser implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Wither
     @NotNull
     @Size(min = 6)
     @Column(name = "password", nullable = false)
@@ -78,6 +80,9 @@ public class BimbelUser implements Serializable {
 
     public static BimbelUser from(BimbelUserDto bimbelUserDto) {
         return new BimbelUser(bimbelUserDto);
+    }
+
+    public static BimbelUser empty() { return new BimbelUser();
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

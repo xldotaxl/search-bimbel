@@ -16,7 +16,8 @@ public class BimbelUserDto {
 
     @NotNull
     @Size(min = 6)
-    @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z.]*[a-zA-Z]+$", message = "Username should only contain alphabet")
+    @Pattern(regexp = "^[a-zA-Z]+[a-zA-Z.]*[a-zA-Z]+$",
+        message = "Username should only contain alphabet (may separated by dot(.)")
     private String username;
 
     @NotNull
