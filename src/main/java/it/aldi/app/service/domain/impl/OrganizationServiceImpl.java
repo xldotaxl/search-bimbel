@@ -1,6 +1,6 @@
-package it.aldi.app.service.impl;
+package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.service.OrganizationService;
+import it.aldi.app.service.domain.OrganizationService;
 import it.aldi.app.domain.Organization;
 import it.aldi.app.repository.OrganizationRepository;
 import org.slf4j.Logger;

@@ -1,16 +1,13 @@
-package it.aldi.app.service.impl;
+package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.exception.EntityNotFoundException;
-import it.aldi.app.service.BimbelUserService;
+import it.aldi.app.service.domain.BimbelUserService;
 import it.aldi.app.domain.BimbelUser;
 import it.aldi.app.repository.BimbelUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

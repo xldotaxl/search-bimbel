@@ -1,4 +1,4 @@
-package it.aldi.app.service;
+package it.aldi.app.service.domain;
 
 import it.aldi.app.domain.Role;
 
@@ -22,11 +22,11 @@ public interface RoleService {
     Role save(Role role);
 
     /**
-     * Get all the roles.
+     * Get all the roles with eager load.
      *
      * @return the list of entities
      */
-    List<Role> findAll();
+    List<Role> findAllWithEagerRelationships();
 
     /**
      * Get all the Role with eager load of many-to-many relationships.
@@ -34,7 +34,7 @@ public interface RoleService {
      * @return the list of entities
      */
     Page<Role> findAllWithEagerRelationships(Pageable pageable);
-    
+
     /**
      * Get the "id" role.
      *
@@ -49,4 +49,18 @@ public interface RoleService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Count all available role
+     *
+     * @return total number of roles
+     */
+    Long countAll();
+
+    /**
+     * Get all the roles (lazy loaded).
+     *
+     * @return the list of entities
+     */
+    List<Role> findAll();
 }

@@ -1,11 +1,10 @@
-package it.aldi.app.service.impl;
+package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.service.RoleService;
 import it.aldi.app.domain.Role;
 import it.aldi.app.repository.RoleRepository;
+import it.aldi.app.service.domain.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -48,7 +47,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Role> findAll() {
+    public List<Role> findAllWithEagerRelationships() {
         log.debug("Request to get all Roles");
         return roleRepository.findAllWithEagerRelationships();
     }
@@ -58,10 +57,10 @@ public class RoleServiceImpl implements RoleService {
      *
      * @return the list of entities
      */
+    @Override
     public Page<Role> findAllWithEagerRelationships(Pageable pageable) {
         return roleRepository.findAllWithEagerRelationships(pageable);
     }
-    
 
     /**
      * Get one role by id.
@@ -85,5 +84,25 @@ public class RoleServiceImpl implements RoleService {
     public void delete(Long id) {
         log.debug("Request to delete Role : {}", id);
         roleRepository.delete(id);
+    }
+
+    /**
+     * Count all available role
+     *
+     * @return total number of roles
+     */
+    @Override
+    public Long countAll() {
+        return roleRepository.count();
+    }
+
+    /**
+     * Get all the roles (lazy loaded).
+     *
+     * @return the list of entities
+     */
+    @Override
+    public List<Role> findAll() {
+        return roleRepository.findAll();
     }
 }

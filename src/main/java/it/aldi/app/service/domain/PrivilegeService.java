@@ -1,4 +1,4 @@
-package it.aldi.app.service;
+package it.aldi.app.service.domain;
 
 import it.aldi.app.domain.Privilege;
 

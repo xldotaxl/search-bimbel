@@ -1,6 +1,6 @@
-package it.aldi.app.service.impl;
+package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.service.PrivilegeService;
+import it.aldi.app.service.domain.PrivilegeService;
 import it.aldi.app.domain.Privilege;
 import it.aldi.app.repository.PrivilegeRepository;
 import org.slf4j.Logger;
