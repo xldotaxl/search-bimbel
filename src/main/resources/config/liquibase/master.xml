@@ -13,4 +13,6 @@
     <include file="classpath:config/liquibase/changelog/20190223045719_added_entity_constraints_BimbelUser.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/20190321231805_added_entity_constraints_Role.xml" relativeToChangelogFile="false"/>
 
+    <include file="classpath:config/liquibase/changelog/00000000000001_initial_role.xml" relativeToChangelogFile="false"/>
+
 </databaseChangeLog>
