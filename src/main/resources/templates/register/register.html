@@ -1,228 +1,81 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header-css(pageTitle='Bimbel Listing')">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Register</title>
 </head>
 
 <body>
-
-<header id="header">
-    <div class="container">
-        <div class="row align-items-center justify-content-between d-flex">
-            <div id="logo">
-                <a
-                    href="index.html"><img src="img/o4.png" alt="" title=""
-                                           th:src="@{/v2/img/o4.png}"/></a>
-                BIMBEL LISTING
-            </div>
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-
-                    <li><a class="ticker-btn" href="#"
-                           th:href="${@routes.REGISTER}">Signup
-                    </a></li>
-                    <li><a class="ticker-btn"
-                           href="#"
-                           th:href="${@routes.SIGNIN}">
-                        Login</a></li>
-                </ul>
-            </nav><!-- #nav-menu-container -->
-        </div>
-    </div>
-</header><!-- #header -->
-
-
-<!-- start banner Area -->
-<section class="banner-area relative" id="home">
-    <div class="overlay overlay-bg"></div>
-    <div class="container">
-        <div class="row search-page-top d-flex align-items-center justify-content-center">
-            <div class="banner-content col-lg-12">
-                <h1 class="text-white">
-                    Register Form
-                </h1>
-                <p class="text-white link-nav">
-                    <a href="index.html">Home </a>
-                    <span class="lnr lnr-arrow-right"></span>
-                    <a href="search.html"> Register page</a>
-                </p>
-                <form th:action="${@routes.REGISTER}" class="serach-form-area"
-                      method="post">
-
-                    <div class="input-container">
-
-                        <input class="input-field"
-                               type="text"
-                               placeholder="Name"
-                               name="name"/>
-                    </div>
-
-                    <div class="input-container">
-
-                        <label>Username
-                            <input class="input-field"
-                                   type="text"
-                                   placeholder="Username"
-                                   name="username"/>
-                        </label>
-                    </div>
-                    <br/>
-                    <div class="input-container">
-
-                        <label>Email
-                            <input class="input-field"
-                                   type="text"
-                                   placeholder="Email"
-                                   name="email"/>
-                        </label>
-                    </div>
-                    <br/>
-                    <div class="input-container">
-                        <div class="default-select" id="default-selects">
-                            <label>Register as
-                                <select>
-                                    <option value="1">Account Type</option>
-                                    <option value="2">Student</option>
-                                    <option value="3">Tutor</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="input-container">
-
-                        <label>Password
-                            <input class="input-field"
-                                   type="password"
-                                   placeholder="Password"
-                                   name="password"/>
-                        </label>
-                    </div>
-                    <br/>
-                    <div class="input-container">
-
-                        <label>Password
-                            <input class="input-field"
-                                   type="password"
-                                   placeholder="Confirm Password"/>
-                        </label>
-                    </div>
-
-
-                    <br/>
-                    <button type="submit" class="btn">Register</button>
-                    <button type="submit" class="btn">Forgot Password?</button>
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-</section>
-<!-- End banner Area -->
-
-<!-- start footer Area -->
-<footer class="footer-area section-gap">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3  col-md-12">
-                <div class="single-footer-widget">
-                    <h6>Our Organization</h6>
-                    <ul class="footer-nav">
-                        <li><a href="#">Affiliate Website</a></li>
-                        <li><a href="#">Bimbel Partners</a></li>
-                        <li><a href="#">Promos</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
+<main layout:fragment="content">
+    <div class="text-center">
+        <h1>Register</h1>
+        <p class="alert alert-danger" th:if="${errMsg}" th:text="${errMsg}"></p>
+        <form th:action="${@routes.REGISTER}"
+              method="post"
+              th:object="${bimbelUserDto}">
+            <div class="form-group row">
+                <label for="name-input" class="col-3">Name</label>
+                <div class="col-6">
+                    <p th:each="error : ${#fields.errors('name')}"
+                       th:text="${error}">Validation error</p>
+                    <input type="text" class="form-control" id="name-input"
+                           required="required"
+                           th:pattern="${@regexConstant.NAME_REGEX}"
+                           th:title="#{validation-title-name}"
+                           th:placeholder="#{placeholder-name}"
+                           th:field="*{name}"/>
                 </div>
             </div>
-            <div class="col-lg-6  col-md-12">
-                <div class="single-footer-widget newsletter">
-                    <h6>Newsletter</h6>
-                    <p>You can trust us. we only send promo offers, not a single
-                        spam.</p>
-                    <div id="mc_embed_signup">
-                        <form target="_blank"
-                              novalidate="true"
-                              action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                              method="get"
-                              class="form-inline">
-
-                            <div class="form-group row" style="width: 100%">
-                                <div class="col-lg-8 col-md-12">
-                                    <input name="EMAIL"
-                                           placeholder="Enter Email"
-                                           onfocus="this.placeholder = ''"
-                                           onblur="this.placeholder = 'Enter Email '"
-                                           required=""
-                                           type="email"/>
-                                    <div style="position: absolute; left: -5000px;">
-                                        <input name="b_36c4fd991d266f23781ded980_aefe40901a"
-                                               tabindex="-1"
-                                               value=""
-                                               type="text"/>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4 col-md-12">
-                                    <button class="nw-btn primary-btn">Subscribe<span
-                                        class="lnr lnr-arrow-right"></span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="info"></div>
-                        </form>
-                    </div>
+            <div class="form-group row">
+                <label for="username-input" class="col-3">Username</label>
+                <div class="col-6">
+                    <p class="alert alert-danger"
+                       th:each="error : ${#fields.errors('username')}"
+                       th:text="${error}">Validation error</p>
+                    <input type="text" class="form-control" id="username-input"
+                           required="required"
+                           minlength="6"
+                           th:pattern="${@regexConstant.USERNAME_REGEX}"
+                           th:title="#{validation-title-username}"
+                           th:placeholder="#{placeholder-username}"
+                           th:field="*{username}"/>
                 </div>
             </div>
-        </div>
-
-        <div class="row footer-bottom d-flex justify-content-between">
-            <p class="col-lg-8 col-sm-12 footer-text m-0 text-white">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(
-              new Date().getFullYear());</script>
-                All rights reserved | This template is made with
-                <i class="fa fa-heart-o" aria-hidden="true"></i> by
-                <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-            <div class="col-lg-4 col-sm-12 footer-social">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-dribbble"></i></a>
-                <a href="#"><i class="fa fa-behance"></i></a>
+            <div class="form-group row">
+                <label for="email-input" class="col-3">Email</label>
+                <div class="col-6">
+                    <p th:each="error : ${#fields.errors('email')}"
+                       th:text="${error}">Validation error</p>
+                    <input type="email"
+                           class="form-control"
+                           id="email-input"
+                           required="required"
+                           th:placeholder="#{placeholder-email}"
+                           th:field="*{email}"/>
+                </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label for="password-input" class="col-3">Password</label>
+                <div class="col-6">
+                    <p th:each="error : ${#fields.errors('password')}"
+                       th:text="${error}">Validation error</p>
+                    <input type="password"
+                           class="form-control"
+                           id="password-input"
+                           required="required"
+                           minlength="6"
+                           th:title="#{validation-title-password}"
+                           th:placeholder="#{placeholder-password}"
+                           th:field="*{password}"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary"
+                    th:text="#{button-submit}"></button>
+        </form>
     </div>
-</footer>
-<!-- End footer Area -->
-
-<script src="js/vendor/jquery-2.2.4.min.js"
-        th:src="@{/v2/js/vendor/jquery-2.2.4.min.js}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="js/vendor/bootstrap.min.js"
-        th:src="@{/v2/js/vendor/bootstrap.min.js}"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="js/easing.min.js" th:src="@{/v2/js/easing.min.js}"></script>
-<script src="js/hoverIntent.js" th:src="@{/v2/js/hoverIntent.js}"></script>
-<script src="js/superfish.min.js" th:src="@{/v2/js/superfish.min.js}"></script>
-<script src="js/jquery.ajaxchimp.min.js"
-        th:src="@{/v2/js/jquery.ajaxchimp.min.js}"></script>
-<script src="js/jquery.magnific-popup.min.js"
-        th:src="@{/v2/js/jquery.magnific-popup.min.js}"></script>
-<script src="js/owl.carousel.min.js"
-        th:src="@{/v2/js/owl.carousel.min.js}"></script>
-<script src="js/jquery.sticky.js" th:src="@{/v2/js/jquery.sticky.js}"></script>
-<script src="js/jquery.nice-select.min.js"
-        th:src="@{/v2/js/jquery.nice-select.min.js}"></script>
-<script src="js/parallax.min.js" th:src="@{/v2/js/parallax.min.js}"></script>
-<script src="js/mail-script.js" th:src="@{/v2/js/mail-script.js}"></script>
-<script src="js/main.js" th:src="@{/v2/js/main.js}"></script>
+</main>
 </body>
 </html>
 
