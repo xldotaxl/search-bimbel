@@ -2,32 +2,26 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="main-list">
-    <div id="education-level-wrapper">
-        <label>Education Level
-            <select>
-                <option value="1">SD</option>
-                <option value="2">SMP</option>
-                <option value="3">SMA</option>
-            </select>
-        </label>
+<div th:fragment="main-list" class="text-left">
+    <div id="select-education-level-wrapper">
+        <label for="education-level-select" class="w-25">Education Level</label>
+        <select id="education-level-select">
+            <option value="1">SMP</option>
+            <option value="2">SMA</option>
+            <option value="3">Universitas</option>
+        </select>
     </div>
     <div id="select-province-wrapper">
-        <label>Select Province
-            <select>
-                <option>Gorontalo</option>
-                <option>DKI Jakarta</option>
-            </select>
-        </label>
+        <label for="province-select" class="w-25">Select Province</label>
+        <select id="province-select">
+            <option></option>
+        </select>
     </div>
     <div id="select-area-wrapper">
-        <label>Select Area
-            <select>
-                <option>Kota Gorontalo</option>
-                <option>Jakarta Barat</option>
-                <option>Jakarta Pusat</option>
-            </select>
-        </label>
+        <label for="area-select" class="w-25">Select Area</label>
+        <select id="area-select">
+            <option></option>
+        </select>
     </div>
 </div>
 </body>
