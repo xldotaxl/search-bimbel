@@ -23,9 +23,6 @@ spring:
             hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
     devtools:
-        remote:
-            debug:
-                enabled: false
         restart:
             enabled: false
 
