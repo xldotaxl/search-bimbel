@@ -2,10 +2,11 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="fragments/head :: header-css">
-    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE">
         Search Bimbel
     </title>
+    <th:block th:include="fragments/head :: header-css"/>
 </head>
 <body>
 
@@ -35,9 +36,7 @@
 </script>
 
 <!-- JS customs -->
-<th:block layout:fragment="custom-js">
-    <script type="text/javascript" th:src="@{js/header.js}"></script>
-</th:block>
+<script type="text/javascript" th:src="@{js/header.js}"></script>
 <th:block layout:fragment="custom-js">
 </th:block>
 </body>
