@@ -15,20 +15,15 @@ const defaultConfigEducationLevel = {
 
 const defaultConfigProvince = {
   ajax: {
-    url: corsProxy + 'https://api.rajaongkir.com/starter/province',
+    url: provinceUrl,
     delay: 500,
-    headers: {
-      key: 'c28f1db1a7340c866d915387d5302123',
-    },
-    data: "",
     dataType: 'json',
     processResults: response => {
-      const { results } = response.rajaongkir;
-      const province = $.map(results, (obj) => {
+      const province = response.map(currentValue => {
         return {
-          id: Number(obj.province_id),
-          text: obj.province,
-        }
+          id: currentValue.id,
+          text: currentValue.name,
+        };
       });
       return {
         // param results is required to parse obj to select2
