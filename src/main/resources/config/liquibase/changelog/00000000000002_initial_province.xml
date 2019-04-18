@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <changeSet id="00000000000002" author="system" dbms="postgresql">
+        <sql>
+            INSERT INTO province(id,name) VALUES (1,'Bali');
+            INSERT INTO province(id,name) VALUES (2,'Bangka Belitung');
+            INSERT INTO province(id,name) VALUES (3,'Banten');
+            INSERT INTO province(id,name) VALUES (4,'Bengkulu');
+            INSERT INTO province(id,name) VALUES (5,'DI Yogyakarta');
+            INSERT INTO province(id,name) VALUES (6,'DKI Jakarta');
+            INSERT INTO province(id,name) VALUES (7,'Gorontalo');
+            INSERT INTO province(id,name) VALUES (8,'Jambi');
+            INSERT INTO province(id,name) VALUES (9,'Jawa Barat');
+            INSERT INTO province(id,name) VALUES (10,'Jawa Tengah');
+            INSERT INTO province(id,name) VALUES (11,'Jawa Timur');
+            INSERT INTO province(id,name) VALUES (12,'Kalimantan Barat');
+            INSERT INTO province(id,name) VALUES (13,'Kalimantan Selatan');
+            INSERT INTO province(id,name) VALUES (14,'Kalimantan Tengah');
+            INSERT INTO province(id,name) VALUES (15,'Kalimantan Timur');
+            INSERT INTO province(id,name) VALUES (16,'Kalimantan Utara');
+            INSERT INTO province(id,name) VALUES (17,'Kepulauan Riau');
+            INSERT INTO province(id,name) VALUES (18,'Lampung');
+            INSERT INTO province(id,name) VALUES (19,'Maluku');
+            INSERT INTO province(id,name) VALUES (20,'Maluku Utara');
+            INSERT INTO province(id,name) VALUES (21,'Nanggroe Aceh Darussalam (NAD)');
+            INSERT INTO province(id,name) VALUES (22,'Nusa Tenggara Barat (NTB)');
+            INSERT INTO province(id,name) VALUES (23,'Nusa Tenggara Timur (NTT)');
+            INSERT INTO province(id,name) VALUES (24,'Papua');
+            INSERT INTO province(id,name) VALUES (25,'Papua Barat');
+            INSERT INTO province(id,name) VALUES (26,'Riau');
+            INSERT INTO province(id,name) VALUES (27,'Sulawesi Barat');
+            INSERT INTO province(id,name) VALUES (28,'Sulawesi Selatan');
+            INSERT INTO province(id,name) VALUES (29,'Sulawesi Tengah');
+            INSERT INTO province(id,name) VALUES (30,'Sulawesi Tenggara');
+            INSERT INTO province(id,name) VALUES (31,'Sulawesi Utara');
+            INSERT INTO province(id,name) VALUES (32,'Sumatera Barat');
+            INSERT INTO province(id,name) VALUES (33,'Sumatera Selatan');
+            INSERT INTO province(id,name) VALUES (34,'Sumatera Utara');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
