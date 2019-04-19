@@ -13,7 +13,7 @@ const defaultConfigEducationLevel = {
 const defaultConfigProvince = {
   language: 'id',
   placeholder: 'Pilih salah satu',
-  width: '25%',
+  width: '30%',
 };
 const defaultConfigArea = {
   ajax: {
@@ -22,23 +22,26 @@ const defaultConfigArea = {
     headers: {
       key: 'c28f1db1a7340c866d915387d5302123',
     },
-    data: () => {
-      if (model.selected_province_id) {
-        return {
-          province: model.selected_province_id,
-        };
-      }
-      return '';
-    },
+    data: getCitiesUrlParam,
     dataType: 'json',
     processResults: processResultsCity,
   },
   data: {id: null, text: null},
   disabled: 'true',
+  minimumResultsForSearch: Infinity,
   language: 'id',
   placeholder: 'Pilih provinsi dahulu',
-  width: '25%',
+  width: '30%',
 };
+
+function getCitiesUrlParam() {
+  if (model.selected_province_id) {
+    return {
+      province: model.selected_province_id,
+    };
+  }
+  return '';
+}
 
 function processResultsCity(response) {
   const city = response.map(currentValue => {
@@ -68,7 +71,7 @@ function resetAreaSelect() {
 document.addEventListener('DOMContentLoaded', function() {
   initSelect2();
   $province.on('select2:select', (e) => {
-    const { data } = e.params;
+    const {data} = e.params;
     model.selected_province_id = data.id;
     resetAreaSelect();
   });
