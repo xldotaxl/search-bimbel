@@ -5,7 +5,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Province.
@@ -24,6 +26,9 @@ public class Province implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "province")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<City> cities = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -44,6 +49,31 @@ public class Province implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<City> getCities() {
+        return cities;
+    }
+
+    public Province cities(Set<City> cities) {
+        this.cities = cities;
+        return this;
+    }
+
+    public Province addCity(City city) {
+        cities.add(city);
+        city.setProvince(this);
+        return this;
+    }
+
+    public Province removeCity(City city) {
+        cities.remove(city);
+        city.setProvince(null);
+        return this;
+    }
+
+    public void setCities(Set<City> cities) {
+        this.cities = cities;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
