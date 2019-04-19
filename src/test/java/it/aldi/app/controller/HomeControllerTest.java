@@ -1,9 +1,11 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.Application;
+import it.aldi.app.service.ProvinceService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,19 +20,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = Application.class, webEnvironment = RANDOM_PORT)
 @Transactional
 public class HomeControllerTest {
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setup() {
-		HomeController homeController = new HomeController();
-		this.mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
-	}
+    @Autowired
+    private ProvinceService provinceService;
 
-	@Test
-	public void testIndex() throws Exception {
-		mockMvc.perform(get("/"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("index"))
-			.andExpect(forwardedUrl("index"));
-	}
+    @Before
+    public void setup() {
+        HomeController homeController = new HomeController(provinceService);
+        this.mockMvc = MockMvcBuilders.standaloneSetup(homeController).build();
+    }
+
+    @Test
+    public void testIndex() throws Exception {
+        mockMvc.perform(get("/"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("index"))
+            .andExpect(forwardedUrl("index"));
+    }
 }

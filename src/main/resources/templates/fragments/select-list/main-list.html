@@ -15,6 +15,9 @@
         <label for="province-select" class="w-25">Select Province</label>
         <select id="province-select">
             <option></option>
+            <option th:each="province : ${provinces}"
+                    th:value="${province.id}"
+                    th:text="${province.name}"></option>
         </select>
     </div>
     <div id="select-area-wrapper">
