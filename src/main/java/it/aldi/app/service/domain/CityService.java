@@ -4,6 +4,7 @@ import it.aldi.app.domain.City;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -41,4 +42,12 @@ public interface CityService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get list of cities based on province
+     *
+     * @param id of the province
+     * @return the list of entities
+     */
+    List<City> findByProvinceId(Long id);
 }

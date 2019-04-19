@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -74,5 +75,16 @@ public class CityServiceImpl implements CityService {
     public void delete(Long id) {
         log.debug("Request to delete City : {}", id);
         cityRepository.delete(id);
+    }
+
+    /**
+     * Get list of cities based on province
+     *
+     * @param id of the province
+     * @return the list of the cities
+     */
+    @Override
+    public List<City> findByProvinceId(Long id) {
+        return cityRepository.findByProvinceId(id);
     }
 }
