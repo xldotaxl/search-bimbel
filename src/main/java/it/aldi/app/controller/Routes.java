@@ -14,6 +14,8 @@ public class Routes {
 
     // REST
     public static final String API = "/api";
-    public static final String PROVINCE = "/province";
-    public static final String API_PROVINCE = API + PROVINCE;
+    public static final String CITIES = "/cities";
+    public static final String PROVINCES = "/provinces";
+    public static final String API_CITIES = API + CITIES;
+    public static final String API_PROVINCE = API + PROVINCES;
 }
