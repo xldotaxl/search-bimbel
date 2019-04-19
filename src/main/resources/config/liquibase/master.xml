@@ -19,5 +19,6 @@
     <include file="classpath:config/liquibase/changelog/00000000000001_initial_role.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000002_initial_province.xml" relativeToChangelogFile="false"/>
     <include file="classpath:config/liquibase/changelog/00000000000003_initial_city.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/00000000000004_drop_sequence.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
