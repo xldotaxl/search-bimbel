@@ -5,7 +5,7 @@
 <div th:fragment="main-list" class="text-left">
     <div id="select-education-level-wrapper">
         <label for="education-level-select" class="w-25">Education Level</label>
-        <select id="education-level-select">
+        <select id="education-level-select" th:field="*{education}">
             <option value="1">SMP</option>
             <option value="2">SMA</option>
             <option value="3">Universitas</option>
@@ -13,8 +13,7 @@
     </div>
     <div id="select-province-wrapper">
         <label for="province-select" class="w-25">Select Province</label>
-        <select id="province-select">
-            <option></option>
+        <select id="province-select" th:field="*{provinceId}">
             <option th:each="province : ${provinces}"
                     th:value="${province.id}"
                     th:text="${province.name}"></option>
@@ -22,8 +21,7 @@
     </div>
     <div id="select-area-wrapper">
         <label for="area-select" class="w-25">Select Area</label>
-        <select id="area-select">
-            <option></option>
+        <select id="area-select" th:field="*{cityId}">
         </select>
     </div>
 </div>
