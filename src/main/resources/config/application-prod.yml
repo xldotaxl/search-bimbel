@@ -1,12 +1,15 @@
 server:
     port: 8080
+    session:
+        cookie:
+            secure: true
 
 spring:
     profiles:
         active: prod
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
-        url: 
+        url:
         databaseName: dbName
         serverName: localhost
         username: username
