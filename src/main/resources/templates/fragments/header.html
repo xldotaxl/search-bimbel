@@ -18,7 +18,6 @@
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow" sec:authorize="isAuthenticated()">
             <a class="nav-link dropdown-toggle"
-               href="#"
                id="userDropdown"
                role="button"
                data-toggle="dropdown"
@@ -47,17 +46,13 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item"
-                   th:href="${@routes.LOGOUT}"
+                   href="#"
                    data-toggle="modal"
                    data-target="#logoutModal">
                     <span
                         class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></span>
                     Logout
                 </a>
-                <form style="visibility: hidden;"
-                      id="logout-form"
-                      method="post"
-                      th:action="${@routes.LOGOUT}"></form>
 
             </div>
         </li>
