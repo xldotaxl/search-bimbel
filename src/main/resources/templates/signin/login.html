@@ -5,40 +5,93 @@
       layout:decorator="layout">
 <head>
     <title>Login</title>
+    <th:block layout:fragment="custom-css" th:remove="tag">
+        <link th:href="@{css/login.css}"
+              rel="stylesheet"/>
+    </th:block>
 </head>
 
 <body>
-<main layout:fragment="content">
-    <div class="text-center">
-        <h1>Login</h1>
-        <form th:action="${@routes.SIGNIN}"
-              method="post"
-              th:object="${bimbelUserDto}">
-            <div class="form-group row">
-                <label for="username-input" class="col-3">Username</label>
-                <div class="col-6">
-                    <input type="text" class="form-control" id="username-input"
-                           required="required"
-                           th:placeholder="#{placeholder-username}"
-                           th:field="*{username}"/>
+<div class="bg-gradient-primary" layout:fragment="content">
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">
+                                            Welcome Back!</h1>
+                                    </div>
+                                    <form class="user"
+                                          th:action="${@routes.SIGNIN}"
+                                          method="post"
+                                          th:object="${bimbelUserDto}">
+                                        <div class="form-group">
+                                            <label for="username-input"></label>
+                                            <input type="text"
+                                                   class="form-control form-control-user"
+                                                   id="username-input"
+                                                   aria-describedby="usernameHelp"
+                                                   required="required"
+                                                   th:placeholder="#{placeholder-username}"
+                                                   th:field="*{username}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password-input"></label>
+                                            <input type="password"
+                                                   class="form-control form-control-user"
+                                                   id="password-input"
+                                                   th:placeholder="#{placeholder-password}"
+                                                   th:field="*{password}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox"
+                                                       class="custom-control-input"
+                                                       id="customCheck"/>
+                                                <label class="custom-control-label"
+                                                       for="customCheck">Remember
+                                                    Me</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit"
+                                                class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <hr/>
+                                    <div class="text-center">
+                                        <a class="small"
+                                           href="forgot-password.html">Forgot
+                                            Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small"
+                                           th:href="${@routes.REGISTER}">
+                                            Create an Account!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-            <div class="form-group row">
-                <label for="password-input" class="col-3">Password</label>
-                <div class="col-6">
-                    <input type="password"
-                           class="form-control"
-                           id="password-input"
-                           required="required"
-                           th:placeholder="#{placeholder-password}"
-                           th:field="*{password}"/>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary"
-                    th:text="#{button-submit}"></button>
-        </form>
+
+        </div>
+
     </div>
-</main>
+</div>
 </body>
 </html>
 
