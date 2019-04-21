@@ -22,6 +22,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
                 .getRequestURI());
         }
 
-        response.sendRedirect(request.getContextPath() + Routes.INDEX);
+        response.sendRedirect(request.getContextPath() + Routes.SIGNIN);
     }
 }
