@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+       th:href="${@routes.INDEX}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <span class="fas fa-laugh-wink"></span>
+        </div>
+        <div class="sidebar-brand-text mx-3">Search Bimbel</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0"/>
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" th:href="${@routes.INDEX}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-title}">Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0"/>
+
+    <!-- Nav Item - Logout -->
+    <li class="nav-item">
+        <a class="nav-link"
+           id="logout-nav"
+           th:href="${@routes.LOGOUT}"
+           th:text="#{label_logout}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span>Logout</span>
+        </a>
+        <form style="visibility: hidden;"
+              id="logout-form"
+              method="post"
+              th:action="${@routes.LOGOUT}"></form>
+    </li>
+
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+</body>
+</html>
