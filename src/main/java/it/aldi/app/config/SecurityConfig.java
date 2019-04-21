@@ -32,10 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/").permitAll()
             .antMatchers("/resources/static/**", "/webjars/**").permitAll()
             .antMatchers("/register/**", "/signin/**").anonymous()
-            .antMatchers("/logout/**").authenticated()
+            .antMatchers("/", "/logout/**").authenticated()
             .and()
             .formLogin()
             .loginPage(Routes.SIGNIN)
