@@ -38,6 +38,7 @@ public class HomeController {
     public String index(Model model) {
 
         model.addAttribute("provinces", provinceService.findAll());
+        model.addAttribute(new SearchBimbelDto());
         return HOME_VIEW;
     }
 
