@@ -227,7 +227,6 @@ public class BimbelUser implements Serializable {
             "id=" + id +
             ", username='" + username + "'" +
             ", name='" + name + "'" +
-            ", password='" + password + "'" +
             ", email='" + email + "'" +
             "}";
     }
