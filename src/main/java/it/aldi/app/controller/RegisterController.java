@@ -52,14 +52,27 @@ public class RegisterController {
         return new ModelAndView(redirect() + Routes.SIGNIN);
     }
 
-    private static ModelAndView dataExistsModelView(BindingResult bindingResult, String errorMsg) {
+    private ModelAndView dataExistsModelView(BindingResult bindingResult, String errorMsg) {
         log.warn("Failed registration, cause: {}", errorMsg);
+
         bindingResult.reject(errorMsg);
-        return new ModelAndView(REGISTER_VIEW, "errMsg", errorMsg);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(REGISTER_VIEW);
+        modelAndView.addObject("errMsg", errorMsg);
+        modelAndView.addObject("roleList", registerService.getPublicRoles());
+
+        return modelAndView;
     }
 
-    private static ModelAndView wrongInputModelView(@ModelAttribute @Valid BimbelUserDto bimbelUserDto) {
+    private ModelAndView wrongInputModelView(@ModelAttribute @Valid BimbelUserDto bimbelUserDto) {
         log.warn("There's an error occured when user register");
-        return new ModelAndView(REGISTER_VIEW, "bimbelUserDto", bimbelUserDto);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName(REGISTER_VIEW);
+        modelAndView.addObject("bimbelUserDto", bimbelUserDto);
+        modelAndView.addObject("roleList", registerService.getPublicRoles());
+
+        return modelAndView;
     }
 }
