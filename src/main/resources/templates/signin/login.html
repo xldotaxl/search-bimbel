@@ -36,6 +36,11 @@
                                           th:action="${@routes.SIGNIN}"
                                           method="post"
                                           th:object="${bimbelUserDto}">
+                                        <div th:if="${param.containsKey('error')}">
+                                            <h5 class="text-center text-danger"
+                                                th:text="#{message-login-fail}">
+                                            </h5>
+                                        </div>
                                         <div class="form-group">
                                             <label for="username-input"></label>
                                             <input type="text"
