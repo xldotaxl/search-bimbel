@@ -1,6 +1,7 @@
 package it.aldi.app.config;
 
 import it.aldi.app.controller.Routes;
+import it.aldi.app.security.AuthSuccessHandler;
 import it.aldi.app.security.CustomAccessDeniedHandler;
 import it.aldi.app.security.service.BimbelUserDetailsService;
 import lombok.NonNull;
@@ -19,6 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
@@ -39,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
             .loginPage(Routes.SIGNIN)
             .permitAll(false)
-            .defaultSuccessUrl(Routes.INDEX)
+            .successHandler(authenticationSuccessHandler())
             .and()
             .logout()
             .logoutUrl(Routes.LOGOUT)
@@ -93,5 +95,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AuthSuccessHandler();
     }
 }
