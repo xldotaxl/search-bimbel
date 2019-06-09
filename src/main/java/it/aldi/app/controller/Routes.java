@@ -11,6 +11,9 @@ public class Routes {
     public static final String REGISTER = "/register";
     public static final String SEARCH = "/search";
     public static final String SIGNIN = "/signin";
+    public static final String TUTOR_HOME = "/tutor";
+    public static final String STUDENT_HOME = "/student";
+    public static final String OWNER_HOME = "/owner";
 
     // REST
     public static final String API = "/api";
