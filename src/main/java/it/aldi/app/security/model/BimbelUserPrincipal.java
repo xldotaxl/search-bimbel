@@ -1,13 +1,15 @@
 package it.aldi.app.security.model;
 
 import it.aldi.app.domain.BimbelUser;
+import it.aldi.app.domain.Role;
 import lombok.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Value(staticConstructor = "of")
 public class BimbelUserPrincipal implements UserDetails {
@@ -16,7 +18,12 @@ public class BimbelUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.<GrantedAuthority>singletonList(new SimpleGrantedAuthority("USER"));
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Role role : bimbelUser.getRoles()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        return grantedAuthorities;
     }
 
     @Override
