@@ -30,5 +30,9 @@ public interface BimbelUserRepository extends JpaRepository<BimbelUser, Long> {
 
     Optional<BimbelUser> findByUsername(String username);
 
+    @Query("select bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch " +
+        "bimbel_user.roles where bimbel_user.username =:username")
+    Optional<BimbelUser> findByUsernameWithEagerRelationships(@Param("username") String username);
+
     Optional<BimbelUser> findByEmail(String email);
 }
