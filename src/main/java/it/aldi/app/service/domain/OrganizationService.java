@@ -1,7 +1,6 @@
 package it.aldi.app.service.domain;
 
 import it.aldi.app.domain.Organization;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,7 +26,6 @@ public interface OrganizationService {
      * @return the list of entities
      */
     Page<Organization> findAll(Pageable pageable);
-
 
     /**
      * Get the "id" organization.

@@ -1,11 +1,10 @@
 package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.service.domain.OrganizationService;
 import it.aldi.app.domain.Organization;
 import it.aldi.app.repository.OrganizationRepository;
+import it.aldi.app.service.domain.OrganizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,7 +51,6 @@ public class OrganizationServiceImpl implements OrganizationService {
         log.debug("Request to get all Organizations");
         return organizationRepository.findAll(pageable);
     }
-
 
     /**
      * Get one organization by id.
