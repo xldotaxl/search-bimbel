@@ -28,6 +28,8 @@ public class Routes {
     public static final String API = "/api";
     public static final String CITIES = "/cities";
     public static final String PROVINCES = "/provinces";
+    public static final String TUTORS = "/tutors";
     public static final String API_CITIES = API + CITIES;
     public static final String API_PROVINCE = API + PROVINCES;
+    public static final String API_TUTORS = API + TUTORS;
 }
