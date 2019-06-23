@@ -21,7 +21,7 @@ public class OwnerController {
         return OWNER_HOME_VIEW;
     }
 
-    @GetMapping("/management_user")
+    @GetMapping("/user_management")
     public String userManagementView(Model model) {
         return OWNER_USER_MANAGEMENT_VIEW;
     }
