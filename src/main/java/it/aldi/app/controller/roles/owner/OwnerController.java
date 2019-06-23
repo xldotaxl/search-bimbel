@@ -1,7 +1,10 @@
 package it.aldi.app.controller.roles.owner;
 
 import it.aldi.app.controller.Routes;
+import it.aldi.app.domain.Organization;
+import it.aldi.app.security.model.BimbelUserPrincipal;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +25,16 @@ public class OwnerController {
     }
 
     @GetMapping("/user_management")
-    public String userManagementView(Model model) {
+    public String userManagementView(Model model, Authentication authentication) {
+        BimbelUserPrincipal bimbelUserPrincipal = (BimbelUserPrincipal) authentication.getPrincipal();
+
+        Long organizationId = bimbelUserPrincipal.getBimbelUser().getOrganizations().stream()
+            .map(Organization::getId)
+            .findFirst()
+            .orElse(null);
+
+        model.addAttribute("orgIds", organizationId);
+
         return OWNER_USER_MANAGEMENT_VIEW;
     }
 }

@@ -5,14 +5,42 @@
       layout:decorator="layout">
 <head>
     <title>Dashboard</title>
+    <th:block layout:fragment="custom-css" th:remove="tag">
+        <link th:href="@{/webjars/datatables/1.10.19/css/jquery.dataTables.min.css}"
+              rel="stylesheet"/>
+    </th:block>
 </head>
 <body>
 <main layout:fragment="content">
-    <h1>THIS IS USER_MANAGEMENT PAGE</h1>
+    <table id="table-tutor" class="display">
+        <thead>
+        <tr>
+            <th th:text="#{table-tutor-title-name}">Column 1</th>
+            <th th:text="#{table-tutor-title-email}">Column 2</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Row 1 Data 1</td>
+            <td>Row 1 Data 2</td>
+        </tr>
+        <tr>
+            <td>Row 2 Data 1</td>
+            <td>Row 2 Data 2</td>
+        </tr>
+        </tbody>
+    </table>
 </main>
 
 <th:block layout:fragment="custom-js">
-
+    <script type="text/javascript" th:inline="javascript">
+        const tutorsApi = [[${@routes.API_TUTORS}]];
+        const organizationIds = [[${orgIds}]];
+    </script>
+    <script type="text/javascript"
+            th:src="@{/webjars/datatables/1.10.19/js/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript"
+            th:src="@{/js/owner/user_management.js}"></script>
 </th:block>
 </body>
 </html>
