@@ -44,7 +44,7 @@ public class Organization implements Serializable {
     @Column(name = "activated")
     private Boolean activated;
 
-    @ManyToMany(mappedBy = "organizations")
+    @ManyToMany(mappedBy = "organizations", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<BimbelUser> bimbelUsers = new HashSet<>();

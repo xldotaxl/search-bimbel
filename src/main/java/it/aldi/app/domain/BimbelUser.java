@@ -57,7 +57,7 @@ public class BimbelUser implements Serializable {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "bimbel_user_organization",
         joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
