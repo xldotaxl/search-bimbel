@@ -35,7 +35,7 @@ public class RegisterServiceImpl implements RegisterService {
     @Override
     public BimbelUser registerUser(BimbelUserDto bimbelUserDto) {
         Set<Role> assignedRoles = assignRoles(bimbelUserDto);
-        BimbelUser bimbelUser = BimbelUser.from(bimbelUserDto, assignedRoles);
+        BimbelUser bimbelUser = BimbelUser.register(bimbelUserDto, assignedRoles);
         return bimbelUserService.save(bimbelUser);
     }
 

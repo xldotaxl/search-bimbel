@@ -2,6 +2,7 @@ package it.aldi.app.domain;
 
 import it.aldi.app.controller.dto.BimbelUserDto;
 import it.aldi.app.util.RegexConstant;
+import it.aldi.app.util.RoleConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.experimental.Wither;
@@ -84,7 +85,14 @@ public class BimbelUser implements Serializable {
         return new BimbelUser(bimbelUserDto);
     }
 
-    public static BimbelUser from(BimbelUserDto bimbelUserDto, Set<Role> roles) {
+    public static BimbelUser register(BimbelUserDto bimbelUserDto, Set<Role> roles) {
+        for (Role role : roles) {
+            if (RoleConstant.owner().equals(role.getName())) {
+                Organization organization = Organization.createDefault(bimbelUserDto.getName());
+                Set<Organization> organizations = new HashSet<>(Collections.singletonList(organization));
+                return from(bimbelUserDto).roles(roles).organizations(organizations);
+            }
+        }
         return from(bimbelUserDto).roles(roles);
     }
 
