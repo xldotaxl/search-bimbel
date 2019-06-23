@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,13 +20,10 @@ public final class CustomApplicationRunner implements ApplicationRunner {
 
     private final BimbelUserRepository bimbelUserRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
     @Autowired
     private CustomApplicationRunner(RegisterService registerService, BimbelUserRepository bimbelUserRepository) {
         this.registerService = registerService;
         this.bimbelUserRepository = bimbelUserRepository;
-        passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -43,7 +38,7 @@ public final class CustomApplicationRunner implements ApplicationRunner {
         bimbelUserDtos.add(BimbelUserDto.builder()
             .email("rivaldi.saputra@jurnal.id")
             .username("rivaldi.saputra")
-            .password(passwordEncoder.encode("aldi123"))
+            .password("aldi123")
             .name("Rivaldi Saputra")
             .roles("OWNER")
             .build());
