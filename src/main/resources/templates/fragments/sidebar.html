@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
     id="accordionSidebar">
@@ -16,6 +17,27 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0"/>
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" th:href="${@routes.INDEX}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-title}">Dashboard</span></a>
+    </li>
+
+    <!-- Nav Item - Bimbel -->
+    <li class="nav-item">
+        <a class="nav-link" th:href="${@routes.INDEX}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-title}">Dashboard</span></a>
+    </li>
+
+    <!-- Nav Item - Schedule -->
+    <li class="nav-item" sec:authorize="hasAuthority('TUTOR')">
+    <a class="nav-link" th:href="${@routes.TUTOR_SCHEDULE}">
+    <span class="fas fa-fw fa-tachometer-alt"></span>
+    <span th:text="#{sidebar-tutor-schedule}">Tutor Schedule</span></a>
+    </li>
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
