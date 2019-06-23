@@ -1,6 +1,8 @@
 package it.aldi.app.security.util;
 
 import it.aldi.app.controller.Routes;
+import it.aldi.app.domain.Organization;
+import it.aldi.app.domain.Role;
 import it.aldi.app.util.RoleConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,5 +30,17 @@ public final class SecurityUtil {
         }
 
         return Routes.INDEX;
+    }
+
+    public static boolean isOwner(Set<Role> roles) {
+        return roles.contains(Role.owner());
+    }
+
+    public static boolean isTutor(Set<Role> roles) {
+        return roles.contains(Role.tutor());
+    }
+
+    public static boolean isStudent(Set<Role> roles) {
+        return roles.contains(Role.student());
     }
 }

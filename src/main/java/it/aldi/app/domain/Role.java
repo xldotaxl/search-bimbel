@@ -1,6 +1,7 @@
 package it.aldi.app.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import it.aldi.app.util.RoleConstant;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -49,8 +50,24 @@ public class Role implements Serializable {
         this.name = name;
     }
 
+    private Role(String name) {
+        this.name = name;
+    }
+
     public static Role valueOf(Long id, String name) {
         return new Role(id, name);
+    }
+
+    public static Role owner() {
+        return new Role(RoleConstant.owner());
+    }
+
+    public static Role tutor() {
+        return new Role(RoleConstant.tutor());
+    }
+
+    public static Role student() {
+        return new Role(RoleConstant.student());
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -135,12 +152,13 @@ public class Role implements Serializable {
             return false;
         }
         Role role = (Role) o;
-        return role.id != null && id != null && Objects.equals(id, role.id);
+        return (role.id != null && id != null && Objects.equals(id, role.id))
+            || (role.name != null && name != null && Objects.equals(name, role.name));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(name);
     }
 
     @Override
