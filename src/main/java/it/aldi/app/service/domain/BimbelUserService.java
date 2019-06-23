@@ -1,7 +1,6 @@
 package it.aldi.app.service.domain;
 
 import it.aldi.app.domain.BimbelUser;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -52,6 +51,7 @@ public interface BimbelUserService {
 
     /**
      * Get the bimbelUser based on id
+     *
      * @param username the username of the entity
      * @return the entity
      */
@@ -59,9 +59,18 @@ public interface BimbelUserService {
 
     /**
      * Get the bimbelUser based on email
+     *
      * @param email the email of the entity
      * @return the entity
      */
     BimbelUser findByEmail(String email);
 
+    /**
+     * Get the bimbelUser based on organization and role
+     *
+     * @param organizationId the id of organization
+     * @param role           the name of role
+     * @return the entities
+     */
+    List<BimbelUser> findByOrganizationAndRole(Long organizationId, String role);
 }

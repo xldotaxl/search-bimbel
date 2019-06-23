@@ -22,7 +22,7 @@ public interface BimbelUserRepository extends JpaRepository<BimbelUser, Long> {
         countQuery = "select count(distinct bimbel_user) from BimbelUser bimbel_user")
     Page<BimbelUser> findAllWithEagerRelationships(Pageable pageable);
 
-    @Query(value = "select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles")
+    @Query("select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles")
     List<BimbelUser> findAllWithEagerRelationships();
 
     @Query("select bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations left join fetch bimbel_user.roles where bimbel_user.id =:id")
@@ -35,4 +35,8 @@ public interface BimbelUserRepository extends JpaRepository<BimbelUser, Long> {
     Optional<BimbelUser> findByUsernameWithEagerRelationships(@Param("username") String username);
 
     Optional<BimbelUser> findByEmail(String email);
+
+    @Query("select distinct bimbel_user from BimbelUser bimbel_user left join fetch bimbel_user.organizations org " +
+        "left join fetch bimbel_user.roles role where org.id =:orgId and role.name =:roleId")
+    List<BimbelUser> findAllByOrganizationAndRole(@Param("orgId") Long organizationId, @Param("roleId") String role);
 }

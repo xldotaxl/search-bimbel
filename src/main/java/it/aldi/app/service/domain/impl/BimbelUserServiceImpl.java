@@ -1,11 +1,10 @@
 package it.aldi.app.service.domain.impl;
 
-import it.aldi.app.service.domain.BimbelUserService;
 import it.aldi.app.domain.BimbelUser;
 import it.aldi.app.repository.BimbelUserRepository;
+import it.aldi.app.service.domain.BimbelUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,7 +67,6 @@ public class BimbelUserServiceImpl implements BimbelUserService {
         return bimbelUserRepository.findAllWithEagerRelationships(pageable);
     }
 
-
     /**
      * Get one bimbelUser by id.
      *
@@ -105,5 +103,10 @@ public class BimbelUserServiceImpl implements BimbelUserService {
         log.debug("Request to get BimbelUser : {}", email);
         return bimbelUserRepository.findByEmail(email)
             .orElse(null);
+    }
+
+    @Override
+    public List<BimbelUser> findByOrganizationAndRole(Long organizationId, String role) {
+        return bimbelUserRepository.findAllByOrganizationAndRole(organizationId, role);
     }
 }
