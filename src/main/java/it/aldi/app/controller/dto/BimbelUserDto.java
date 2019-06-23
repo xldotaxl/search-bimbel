@@ -2,6 +2,7 @@ package it.aldi.app.controller.dto;
 
 import it.aldi.app.util.RegexConstant;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BimbelUserDto {

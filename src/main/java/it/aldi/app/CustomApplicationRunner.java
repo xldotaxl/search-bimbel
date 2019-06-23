@@ -1,7 +1,8 @@
 package it.aldi.app;
 
-import it.aldi.app.domain.BimbelUser;
+import it.aldi.app.controller.dto.BimbelUserDto;
 import it.aldi.app.repository.BimbelUserRepository;
+import it.aldi.app.service.register.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -17,12 +18,15 @@ import java.util.List;
 @Slf4j
 public final class CustomApplicationRunner implements ApplicationRunner {
 
+    private final RegisterService registerService;
+
     private final BimbelUserRepository bimbelUserRepository;
 
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    private CustomApplicationRunner(BimbelUserRepository bimbelUserRepository) {
+    private CustomApplicationRunner(RegisterService registerService, BimbelUserRepository bimbelUserRepository) {
+        this.registerService = registerService;
         this.bimbelUserRepository = bimbelUserRepository;
         passwordEncoder = new BCryptPasswordEncoder();
     }
@@ -35,14 +39,17 @@ public final class CustomApplicationRunner implements ApplicationRunner {
     }
 
     private void insertInitialUser() {
-        List<BimbelUser> bimbelUsers = new ArrayList<>();
-        bimbelUsers.add(BimbelUser.builder()
-            .id(1L)
+        List<BimbelUserDto> bimbelUserDtos = new ArrayList<>();
+        bimbelUserDtos.add(BimbelUserDto.builder()
+            .email("rivaldi.saputra@jurnal.id")
             .username("rivaldi.saputra")
-            .email("cbot59@gmail.com")
+            .password(passwordEncoder.encode("aldi123"))
             .name("Rivaldi Saputra")
-            .password(passwordEncoder.encode("jurnal123"))
+            .roles("OWNER")
             .build());
-        bimbelUserRepository.save(bimbelUsers);
+
+        for (BimbelUserDto bimbelUserDto : bimbelUserDtos) {
+            registerService.registerUser(bimbelUserDto);
+        }
     }
 }
