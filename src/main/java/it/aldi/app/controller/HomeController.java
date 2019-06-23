@@ -1,10 +1,13 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.controller.dto.SearchBimbelDto;
+import it.aldi.app.security.util.SecurityUtil;
 import it.aldi.app.service.ProvinceService;
 import it.aldi.app.util.SessionAttrConstant;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
 
 import static it.aldi.app.util.ControllerConstant.redirect;
 
@@ -35,11 +40,12 @@ public class HomeController {
      * Show home page.
      */
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, Authentication authentication) {
 
-        model.addAttribute("provinces", provinceService.findAll());
-        model.addAttribute(new SearchBimbelDto());
-        return HOME_VIEW;
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>(authentication.getAuthorities());
+        String redirectUrl = SecurityUtil.getTargetUrlBasedOnRole(grantedAuthorities);
+
+        return redirect() + redirectUrl;
     }
 
     @PostMapping
