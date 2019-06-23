@@ -7,6 +7,7 @@ import it.aldi.app.service.domain.BimbelUserService;
 import it.aldi.app.service.domain.RoleService;
 import it.aldi.app.service.register.RegisterService;
 import it.aldi.app.util.ErrorMsgConstant;
+import it.aldi.app.util.RoleConstant;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -19,11 +20,11 @@ public class RegisterServiceImpl implements RegisterService {
     private static final String SUPER_ADMIN = "SUPER_ADMIN";
     private static final String OWNER = "OWNER";
 
-    private ErrorMsgConstant errorMsgConstant;
+    private final ErrorMsgConstant errorMsgConstant;
 
-    private BimbelUserService bimbelUserService;
+    private final BimbelUserService bimbelUserService;
 
-    private RoleService roleService;
+    private final RoleService roleService;
 
     public RegisterServiceImpl(ErrorMsgConstant errorMsgConstant, BimbelUserService bimbelUserService,
                                RoleService roleService) {
@@ -63,7 +64,7 @@ public class RegisterServiceImpl implements RegisterService {
             case SUPER_ADMIN:
                 return everyRoles(availableRoles);
             case OWNER:
-                return nonSuperAdminRoles(availableRoles);
+                return managementRoles(availableRoles);
             default:
                 return singleRole(bimbelUserDto, availableRoles);
         }
@@ -75,10 +76,15 @@ public class RegisterServiceImpl implements RegisterService {
             .collect(Collectors.toSet());
     }
 
-    private static Set<Role> nonSuperAdminRoles(List<Role> availableRoles) {
+    private static Set<Role> managementRoles(List<Role> availableRoles) {
         return availableRoles.stream()
-            .filter(role -> !role.getName().equalsIgnoreCase(SUPER_ADMIN))
+            .filter(RegisterServiceImpl::isManagementRole)
             .collect(Collectors.toSet());
+    }
+
+    private static boolean isManagementRole(Role role) {
+        return role.getName().equalsIgnoreCase(RoleConstant.owner())
+            || role.getName().equalsIgnoreCase(RoleConstant.tutor());
     }
 
     private static Set<Role> everyRoles(List<Role> availableRoles) {
