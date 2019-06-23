@@ -1,6 +1,5 @@
 package it.aldi.app.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -42,10 +41,26 @@ public class Organization implements Serializable {
     @Column(name = "phone", length = 20)
     private String phone;
 
+    @Column(name = "activated")
+    private Boolean activated;
+
     @ManyToMany(mappedBy = "organizations")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JsonIgnore
     private Set<BimbelUser> bimbelUsers = new HashSet<>();
+
+    private Organization() {}
+
+    private Organization(String name) {
+        this.name = name;
+        address = "";
+        phone = null;
+        activated = false;
+    }
+
+    public static Organization createDefault(String name) {
+        return new Organization(name);
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -93,6 +108,19 @@ public class Organization implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Boolean isActivated() {
+        return activated;
+    }
+
+    public Organization activated(Boolean activated) {
+        this.activated = activated;
+        return this;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
     }
 
     public Set<BimbelUser> getBimbelUsers() {
@@ -148,6 +176,7 @@ public class Organization implements Serializable {
             ", name='" + getName() + "'" +
             ", address='" + getAddress() + "'" +
             ", phone='" + getPhone() + "'" +
+            ", activated='" + isActivated() + "'" +
             "}";
     }
 }
