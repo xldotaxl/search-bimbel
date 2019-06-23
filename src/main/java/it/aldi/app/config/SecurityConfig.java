@@ -4,6 +4,7 @@ import it.aldi.app.controller.Routes;
 import it.aldi.app.security.AuthSuccessHandler;
 import it.aldi.app.security.CustomAccessDeniedHandler;
 import it.aldi.app.security.service.BimbelUserDetailsService;
+import it.aldi.app.util.RoleConstant;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/resources/static/**", "/webjars/**").permitAll()
             .antMatchers("/register/**", "/signin/**").anonymous()
             .antMatchers("/", "/logout/**").authenticated()
+            .antMatchers(Routes.TUTOR_HOME + "/**").hasAuthority(RoleConstant.tutor())
+            .antMatchers(Routes.OWNER_HOME + "/**").hasAuthority(RoleConstant.owner())
+            .antMatchers(Routes.STUDENT_HOME + "/**").hasAuthority(RoleConstant.student())
             .and()
             .formLogin()
             .loginPage(Routes.SIGNIN)
