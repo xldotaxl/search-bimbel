@@ -13,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OwnerController {
 
     private static final String OWNER_HOME_VIEW = "owner/owner";
+    private static final String OWNER_USER_MANAGEMENT_VIEW = "owner/user_management";
 
     @GetMapping
     public String ownerDashboard(Model model) {
         log.debug("Entering owner's home");
         return OWNER_HOME_VIEW;
+    }
+
+    @GetMapping("/management_user")
+    public String userManagementView(Model model) {
+        return OWNER_USER_MANAGEMENT_VIEW;
     }
 }

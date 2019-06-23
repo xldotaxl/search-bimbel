@@ -26,10 +26,10 @@
     </li>
 
     <!-- Nav Item - Bimbel -->
-    <li class="nav-item">
-        <a class="nav-link" th:href="${@routes.INDEX}">
+    <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" th:href="${@routes.OWNER_USER_MANAGEMENT}">
             <span class="fas fa-fw fa-tachometer-alt"></span>
-            <span th:text="#{sidebar-title}">Dashboard</span></a>
+            <span th:text="#{sidebar-owner-user-management}">Manage user</span></a>
     </li>
 
     <!-- Nav Item - Schedule -->
