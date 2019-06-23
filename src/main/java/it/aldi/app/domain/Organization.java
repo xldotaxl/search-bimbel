@@ -53,7 +53,7 @@ public class Organization implements Serializable {
 
     private Organization(String name) {
         this.name = name;
-        address = "";
+        address = "Jakarta";
         phone = null;
         activated = false;
     }
