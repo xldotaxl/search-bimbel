@@ -28,7 +28,7 @@ public interface BimbelUserService {
     List<BimbelUser> findAll();
 
     /**
-     * Get all the BimbelUser with eager load of many-to-many relationships.
+     * Get all the bimbelUsers with eager load of many-to-many relationships.
      *
      * @return the list of entities
      */
@@ -66,11 +66,11 @@ public interface BimbelUserService {
     BimbelUser findByEmail(String email);
 
     /**
-     * Get the bimbelUser based on organization and role
+     * Get all the bimbelUsers based on organization and role
      *
      * @param organizationId the id of organization
      * @param role           the name of role
      * @return the entities
      */
-    List<BimbelUser> findByOrganizationAndRole(Long organizationId, String role);
+    List<BimbelUser> findAllByOrganizationAndRole(Long organizationId, String role);
 }

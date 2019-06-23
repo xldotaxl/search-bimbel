@@ -21,7 +21,7 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public List<TutorDto> getTutors(Long organizationId) {
-        List<BimbelUser> bimbelUsers = bimbelUserService.findByOrganizationAndRole(organizationId,
+        List<BimbelUser> bimbelUsers = bimbelUserService.findAllByOrganizationAndRole(organizationId,
             RoleConstant.tutor()
         );
 

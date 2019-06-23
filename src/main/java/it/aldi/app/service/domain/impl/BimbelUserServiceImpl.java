@@ -106,7 +106,7 @@ public class BimbelUserServiceImpl implements BimbelUserService {
     }
 
     @Override
-    public List<BimbelUser> findByOrganizationAndRole(Long organizationId, String role) {
+    public List<BimbelUser> findAllByOrganizationAndRole(Long organizationId, String role) {
         return bimbelUserRepository.findAllByOrganizationAndRole(organizationId, role);
     }
 }
