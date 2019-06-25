@@ -5,14 +5,27 @@
       layout:decorator="layout">
 <head>
     <title>Dashboard</title>
+    <th:block layout:fragment="custom-css" th:remove="tag">
+        <link
+            th:href="@{/webjars/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css}"
+            rel="stylesheet"/>
+    </th:block>
 </head>
 <body>
 <main layout:fragment="content">
     <h1>THIS IS TUTOR SCHEDULE PAGE</h1>
+    <div class="input-group date" data-provide="datepicker-inline">
+        <label for="input-schedule-date"></label>
+        <input type="text" class="form-control" id="input-schedule-date"/>
+        <div class="input-group-append input-group-text">
+            <span class="fas fa-th"></span>
+        </div>
+    </div>
 </main>
 
 <th:block layout:fragment="custom-js">
-
+    <script type="text/javascript"
+            th:src="@{/webjars/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js}"></script>
 </th:block>
 </body>
 </html>
