@@ -2,9 +2,7 @@ package it.aldi.app.controller;
 
 import it.aldi.app.controller.dto.SearchBimbelDto;
 import it.aldi.app.security.util.SecurityUtil;
-import it.aldi.app.service.ProvinceService;
 import it.aldi.app.util.SessionAttrConstant;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,12 +27,6 @@ import static it.aldi.app.util.ControllerConstant.redirect;
 public class HomeController {
 
     private static final String HOME_VIEW = "home/home";
-
-    private final @NonNull ProvinceService provinceService;
-
-    public HomeController(ProvinceService provinceService) {
-        this.provinceService = provinceService;
-    }
 
     /**
      * Show home page.
