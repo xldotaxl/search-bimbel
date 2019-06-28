@@ -1,0 +1,6 @@
+branches:
+  only:
+    - master
+git:
+  depth: false
+language: java
