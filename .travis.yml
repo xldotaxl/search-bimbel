@@ -1,9 +1,24 @@
+addons:
+  sonarcloud:
+    organization: cbot59-github
 branches:
   only:
     - master
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+deploy:
+  api_key:
+    secure: asWmU9ukm85GfqQPa0AJmfuNkqENMmQl+26gd5GfgOPc1Wtt0PLoxpH1M56Au69oIR/e7D6eP1EKUKMr7Q9Q1xBf9qtXylN3DgDqfoAxmVmGcyRCx//Gduex6uuGNjXKDyud4wU2fuJczbCs7jT1Qybf7ev5Im7S218OrriV7K475yy3vPbYvmlviEeGVRxTl01gC9s8NnWKjr0LHiZW0HOwI547H9zJdoHE/2jdCsT74PDlydzKOqtYN8BNtBJ+OHovaqtJoXgsp3bDtW9Ttfx6+VVbzl/8oPyCQy6uh5bH/ODX/IXlDPXBfymzHCZrfFAYnN2va4Czx/5K3kEcRZYOWQu5IajDm6AhPoqJ9Pe2eXlk1CjWPEhXiLeIUzEVAx2IA5KeclkO+ilCTutgMW2pnMHl5NPWElvSHDN8MRgP0YTxj/CqNrvR3Bd2qIgPwweBv80OBRNzS69AyKy2ZG9JeTYoGPeTCtftwkeLZopHoYBfy87ZzTO6+9wGufnuYLkothsTd0i5zUQbm2+OCCW0V6ycTizKjSVws3V21aUBL+98/oxKqyqv9OY6qHfCf5ZsljJJGY75M+eaKJuvqI+2+/zW7FtWEnQtHT+d09L+8LvWhzvvZu3w3Q0yHq3OfdAml7XMHG+l5I9XNMzU3u9Qo4qHxcD9dHgNh1YEXmc=
+  app: search-bimbel
+  on:
+    repo: cbot59/search-bimbel
+  provider: heroku
 git:
   depth: false
 language: java
 jdk:
-  - oraclejdk8
   - openjdk8
+script:
+  - mvn clean verify sonar:sonar
