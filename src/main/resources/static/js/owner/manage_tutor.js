@@ -1,5 +1,9 @@
 const $tableTutor = $('#table-tutor');
 
+function getActionButton(id) {
+  return `<a href="#">View</a> | <a href="#">Delete</a>`;
+}
+
 const dataTableProp = {
   ajax: {
     dataSrc: json => {
@@ -10,8 +14,16 @@ const dataTableProp = {
     url: `${tutorsApi}/${organizationIds}`,
   },
   columns: [
-    { data: 'name' },
-    { data: 'email' },
+    {data: 'name'},
+    {data: 'username'},
+    {data: 'email'},
+    {data: 'subjects'},
+    {
+      data: 'id',
+      render: (data) => {
+        return getActionButton(data);
+      },
+    },
   ],
   dom: 'ftipr',
   processing: true,

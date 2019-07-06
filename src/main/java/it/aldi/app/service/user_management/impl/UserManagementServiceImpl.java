@@ -26,7 +26,7 @@ public class UserManagementServiceImpl implements UserManagementService {
         );
 
         return bimbelUsers.stream()
-            .map(bimbelUser -> TutorDto.valueOf(bimbelUser.getName(), bimbelUser.getEmail()))
+            .map(TutorDto::valueOf)
             .collect(Collectors.toList());
     }
 }
