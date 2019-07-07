@@ -1,9 +1,13 @@
 package it.aldi.app.security.util;
 
+import it.aldi.app.controller.Routes;
 import it.aldi.app.domain.Role;
+import it.aldi.app.util.RoleConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -25,7 +29,15 @@ public class SecurityUtilTest {
     }
 
     @Test
-    public void isOwner() {
+    public void testGetTargetUrlBasedOnRoleShouldRouteToStudentHome() {
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(RoleConstant.student()));
+
+        assertEquals("Route to student home", Routes.STUDENT_HOME, SecurityUtil.getTargetUrlBasedOnRole(grantedAuthorities));
+    }
+
+    @Test
+    public void testIsOwnerShouldReturnTrue() {
         Role persistentOwner = Role.valueOf(1L, "OWNER");
         Role persistentStudent = Role.valueOf(2L, "STUDENT");
         Set<Role> roles = new HashSet<>(Arrays.asList(persistentOwner, persistentStudent));
