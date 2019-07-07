@@ -23,7 +23,7 @@ public class StudentRestController {
     }
 
     @GetMapping("{/orgId}")
-    public ResponseEntity<List<StudentDto>> getStudents(@PathVariable("orgId") Long id) {
+    public ResponseEntity<List<StudentDto>> getStudentsByOrgId(@PathVariable("orgId") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
             .body(userManagementService.getStudents(id));
     }

@@ -23,7 +23,7 @@ public class TutorRestController {
     }
 
     @GetMapping("/{orgId}")
-    public ResponseEntity<List<TutorDto>> getAllTutorById(@PathVariable("orgId") Long id) {
+    public ResponseEntity<List<TutorDto>> getTutorsByOrgId(@PathVariable("orgId") Long id) {
         return new ResponseEntity<>(userManagementService.getTutors(id), HttpStatus.OK);
     }
 }
