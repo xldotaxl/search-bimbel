@@ -1,5 +1,6 @@
 package it.aldi.app.service.user_management.impl;
 
+import it.aldi.app.controller.rest.dto.response.StudentDto;
 import it.aldi.app.controller.rest.dto.response.TutorDto;
 import it.aldi.app.domain.BimbelUser;
 import it.aldi.app.service.domain.BimbelUserService;
@@ -21,12 +22,25 @@ public class UserManagementServiceImpl implements UserManagementService {
 
     @Override
     public List<TutorDto> getTutors(Long organizationId) {
-        List<BimbelUser> bimbelUsers = bimbelUserService.findAllByOrganizationAndRole(organizationId,
+        List<BimbelUser> bimbelUsers = bimbelUserService.findAllByOrganizationAndRole(
+            organizationId,
             RoleConstant.tutor()
         );
 
         return bimbelUsers.stream()
             .map(TutorDto::valueOf)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StudentDto> getStudents(Long organizationId) {
+        List<BimbelUser> bimbelUsers = bimbelUserService.findAllByOrganizationAndRole(
+            organizationId,
+            RoleConstant.student()
+        );
+
+        return bimbelUsers.stream()
+            .map(StudentDto::valueOf)
             .collect(Collectors.toList());
     }
 }
