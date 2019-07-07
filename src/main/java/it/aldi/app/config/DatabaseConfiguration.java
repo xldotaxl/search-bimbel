@@ -1,9 +1,7 @@
 package it.aldi.app.config;
 
-import java.util.Arrays;
-
-import javax.sql.DataSource;
-
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
@@ -16,9 +14,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
+import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 @EnableJpaRepositories("it.aldi.app.repository")
@@ -60,10 +57,4 @@ public class DatabaseConfiguration implements EnvironmentAware{
 
         return new HikariDataSource(config);
     }
-
-    @Bean
-    public Hibernate4Module hibernate4Module() {
-        return new Hibernate4Module();
-    }
-    
 }

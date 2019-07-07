@@ -20,7 +20,7 @@ public class Routes {
     public static final String STUDENT_HOME = "/student";
     // OWNER
     public static final String OWNER_HOME = "/owner";
-    public static final String OWNER_USER_MANAGEMENT = OWNER_HOME + "/user_management";
+    public static final String OWNER_MANAGE_TUTOR = OWNER_HOME + "/manage_tutor";
 
     /*
      * Rest endpoint
@@ -28,8 +28,10 @@ public class Routes {
     public static final String API = "/api";
     public static final String CITIES = "/cities";
     public static final String PROVINCES = "/provinces";
+    public static final String STUDENTS = "/students";
     public static final String TUTORS = "/tutors";
     public static final String API_CITIES = API + CITIES;
     public static final String API_PROVINCE = API + PROVINCES;
+    public static final String API_STUDENTS = API + STUDENTS;
     public static final String API_TUTORS = API + TUTORS;
 }

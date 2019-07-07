@@ -7,23 +7,23 @@ import java.util.Arrays;
 import java.util.List;
 
 @Value
-public class TutorDto {
+public class StudentDto {
     private Long id;
     private String name;
     private String email;
     private String username;
     private List<String> subjects;
 
-    public TutorDto(BimbelUser bimbelUser) {
+    private StudentDto(BimbelUser bimbelUser) {
         id = bimbelUser.getId();
         name = bimbelUser.getName();
         email = bimbelUser.getEmail();
-        username = bimbelUser.getEmail();
+        username = bimbelUser.getUsername();
         // TODO: get subject from entity relation
-        subjects = Arrays.asList("Matematika", "Fisika");
+        subjects = Arrays.asList("Kimia", "Biologi");
     }
 
-    public static TutorDto valueOf(BimbelUser bimbelUser) {
-        return new TutorDto(bimbelUser);
+    public static StudentDto valueOf(BimbelUser bimbelUser) {
+        return new StudentDto(bimbelUser);
     }
 }

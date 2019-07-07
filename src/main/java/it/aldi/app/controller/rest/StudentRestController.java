@@ -1,7 +1,7 @@
 package it.aldi.app.controller.rest;
 
 import it.aldi.app.controller.Routes;
-import it.aldi.app.controller.rest.dto.response.TutorDto;
+import it.aldi.app.controller.rest.dto.response.StudentDto;
 import it.aldi.app.service.user_management.UserManagementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(Routes.API_TUTORS)
-public class TutorRestController {
+@RequestMapping(Routes.API_STUDENTS)
+public class StudentRestController {
 
     private final UserManagementService userManagementService;
 
-    public TutorRestController(UserManagementService userManagementService) {
+    public StudentRestController(UserManagementService userManagementService) {
         this.userManagementService = userManagementService;
     }
 
-    @GetMapping("/{orgId}")
-    public ResponseEntity<List<TutorDto>> getTutorsByOrgId(@PathVariable("orgId") Long id) {
-        return new ResponseEntity<>(userManagementService.getTutors(id), HttpStatus.OK);
+    @GetMapping("{/orgId}")
+    public ResponseEntity<List<StudentDto>> getStudentsByOrgId(@PathVariable("orgId") Long id) {
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(userManagementService.getStudents(id));
     }
 }

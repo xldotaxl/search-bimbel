@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OwnerController {
 
     private static final String OWNER_HOME_VIEW = "owner/owner";
-    private static final String OWNER_USER_MANAGEMENT_VIEW = "owner/user_management";
+    private static final String OWNER_MANAGE_TUTOR_VIEW = "owner/manage_tutor";
 
     @GetMapping
     public String ownerDashboard(Model model) {
@@ -24,7 +24,7 @@ public class OwnerController {
         return OWNER_HOME_VIEW;
     }
 
-    @GetMapping("/user_management")
+    @GetMapping("/manage_tutor")
     public String userManagementView(Model model, Authentication authentication) {
         BimbelUserPrincipal bimbelUserPrincipal = (BimbelUserPrincipal) authentication.getPrincipal();
 
@@ -35,6 +35,6 @@ public class OwnerController {
 
         model.addAttribute("orgIds", organizationId);
 
-        return OWNER_USER_MANAGEMENT_VIEW;
+        return OWNER_MANAGE_TUTOR_VIEW;
     }
 }
