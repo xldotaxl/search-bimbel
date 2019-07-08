@@ -22,7 +22,7 @@ public class StudentRestController {
         this.userManagementService = userManagementService;
     }
 
-    @GetMapping("{/orgId}")
+    @GetMapping("/{orgId}")
     public ResponseEntity<List<StudentDto>> getStudentsByOrgId(@PathVariable("orgId") Long id) {
         return ResponseEntity.status(HttpStatus.OK)
             .body(userManagementService.getStudents(id));
