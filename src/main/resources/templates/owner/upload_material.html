@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4"
+         th:text="#{content-upload_material-title}">
+        Upload Learning Material
+    </div>
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input"
+                   id="input-file-material"/>
+            <label class="custom-file-label"
+                   for="input-file-material"
+                   aria-describedby="upload-input-file">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button"
+                    id="button-upload-input-file">Upload
+            </button>
+        </div>
+    </div>
+</main>
+
+<th:block layout:fragment="custom-js">
+
+</th:block>
+</body>
+</html>

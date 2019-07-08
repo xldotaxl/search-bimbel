@@ -20,7 +20,9 @@ public class Routes {
     public static final String STUDENT_HOME = "/student";
     // OWNER
     public static final String OWNER_HOME = "/owner";
+    public static final String OWNER_MANAGE_STUDENT = OWNER_HOME + "/manage_student";
     public static final String OWNER_MANAGE_TUTOR = OWNER_HOME + "/manage_tutor";
+    public static final String OWNER_UPLOAD_MATERIAL = OWNER_HOME + "/upload_material";
 
     /*
      * Rest endpoint

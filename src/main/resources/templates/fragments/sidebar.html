@@ -25,12 +25,28 @@
             <span th:text="#{sidebar-title}">Dashboard</span></a>
     </li>
 
-    <!-- Nav Item - Bimbel -->
+    <!-- Nav Item - Manage Tutor -->
     <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
         <a class="nav-link" th:href="${@routes.OWNER_MANAGE_TUTOR}">
             <span class="fas fa-fw fa-tachometer-alt"></span>
             <span th:text="#{sidebar-owner-manage_tutor}">Manage
                 tutor</span></a>
+    </li>
+
+    <!-- Nav Item - Manage Student -->
+    <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" th:href="${@routes.OWNER_MANAGE_STUDENT}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-owner-manage_student}">Manage
+                student</span></a>
+    </li>
+
+    <!-- Nav Item - Upload Material -->
+    <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" th:href="${@routes.OWNER_UPLOAD_MATERIAL}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-owner-upload_material}">Upload
+                Learning Material</span></a>
     </li>
 
     <!-- Nav Item - Schedule -->

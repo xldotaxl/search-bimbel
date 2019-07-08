@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OwnerController {
 
     private static final String OWNER_HOME_VIEW = "owner/owner";
+    private static final String OWNER_MANAGE_STUDENT_VIEW = "owner/manage_student";
     private static final String OWNER_MANAGE_TUTOR_VIEW = "owner/manage_tutor";
+    private static final String OWNER_UPLOAD_MATERIAL_VIEW = "owner/upload_material";
 
     @GetMapping
     public String ownerDashboard(Model model) {
@@ -24,8 +26,22 @@ public class OwnerController {
         return OWNER_HOME_VIEW;
     }
 
+    @GetMapping("/manage_student")
+    public String manageStudent(Model model, Authentication authentication) {
+        BimbelUserPrincipal bimbelUserPrincipal = (BimbelUserPrincipal) authentication.getPrincipal();
+
+        Long organizationId = bimbelUserPrincipal.getBimbelUser().getOrganizations().stream()
+            .map(Organization::getId)
+            .findFirst()
+            .orElse(null);
+
+        model.addAttribute("orgIds", organizationId);
+
+        return OWNER_MANAGE_STUDENT_VIEW;
+    }
+
     @GetMapping("/manage_tutor")
-    public String userManagementView(Model model, Authentication authentication) {
+    public String manageTutor(Model model, Authentication authentication) {
         BimbelUserPrincipal bimbelUserPrincipal = (BimbelUserPrincipal) authentication.getPrincipal();
 
         Long organizationId = bimbelUserPrincipal.getBimbelUser().getOrganizations().stream()
@@ -36,5 +52,10 @@ public class OwnerController {
         model.addAttribute("orgIds", organizationId);
 
         return OWNER_MANAGE_TUTOR_VIEW;
+    }
+
+    @GetMapping("/upload_material")
+    public String uploadMaterial() {
+        return OWNER_UPLOAD_MATERIAL_VIEW;
     }
 }

@@ -1,6 +1,7 @@
 package it.aldi.app.controller.rest.dto.response;
 
 import it.aldi.app.domain.BimbelUser;
+import it.aldi.app.domain.Role;
 import lombok.Value;
 
 import java.util.Arrays;
@@ -12,15 +13,14 @@ public class StudentDto {
     private String name;
     private String email;
     private String username;
-    private List<String> subjects;
+    private String role;
 
     private StudentDto(BimbelUser bimbelUser) {
         id = bimbelUser.getId();
         name = bimbelUser.getName();
         email = bimbelUser.getEmail();
         username = bimbelUser.getUsername();
-        // TODO: get subject from entity relation
-        subjects = Arrays.asList("Kimia", "Biologi");
+        role = "Student";
     }
 
     public static StudentDto valueOf(BimbelUser bimbelUser) {
