@@ -41,6 +41,14 @@
                 student</span></a>
     </li>
 
+    <!-- Nav Item - Upload Material -->
+    <li class="nav-item" sec:authorize="hasAuthority('OWNER')">
+        <a class="nav-link" th:href="${@routes.OWNER_UPLOAD_MATERIAL}">
+            <span class="fas fa-fw fa-tachometer-alt"></span>
+            <span th:text="#{sidebar-owner-upload_material}">Upload
+                Learning Material</span></a>
+    </li>
+
     <!-- Nav Item - Schedule -->
     <li class="nav-item" sec:authorize="hasAuthority('TUTOR')">
         <a class="nav-link" th:href="${@routes.TUTOR_SCHEDULE}">

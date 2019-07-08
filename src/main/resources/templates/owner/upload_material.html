@@ -8,19 +8,22 @@
 </head>
 <body>
 <main layout:fragment="content">
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        Homepage
+    <div class="d-sm-flex align-items-center justify-content-between mb-4"
+         th:text="#{content-upload_material-title}">
+        Upload Learning Material
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered"
-                   id="dataTable"
-                   width="100%"
-                   cellspacing="0">
-                <tbody>
-                <tr>use the sidebar to get started</tr>
-                </tbody>
-            </table>
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input"
+                   id="input-file-material"/>
+            <label class="custom-file-label"
+                   for="input-file-material"
+                   aria-describedby="upload-input-file">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button"
+                    id="button-upload-input-file">Upload
+            </button>
         </div>
     </div>
 </main>
