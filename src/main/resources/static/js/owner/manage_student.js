@@ -1,7 +1,7 @@
-const $tableTutor = $('#table-tutor');
+const $tableStudent = $('#table-student');
 
 function getActionButton(id) {
-  return `<a href="#">View</a> | <a href="#">Delete</a>`;
+  return `<button href="#">Delete</button>`;
 }
 
 const dataTableProp = {
@@ -11,13 +11,13 @@ const dataTableProp = {
       json.recordsFiltered = json.length;
       return json;
     },
-    url: `${tutorsApi}/${organizationIds}`,
+    url: `${studentsApi}/${organizationIds}`,
   },
   columns: [
     {data: 'name'},
     {data: 'username'},
     {data: 'email'},
-    {data: 'subjects'},
+    {data: 'role'},
     {
       data: 'id',
       render: (data) => {
@@ -32,5 +32,5 @@ const dataTableProp = {
 };
 
 $(document).ready(() => {
-  $tableTutor.DataTable(dataTableProp);
+  $tableStudent.DataTable(dataTableProp);
 });
