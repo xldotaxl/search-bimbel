@@ -1,12 +1,14 @@
 package it.aldi.app.controller;
 
 import it.aldi.app.Application;
+import it.aldi.app.service.ProvinceService;
 import it.aldi.app.util.ControllerConstant;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,6 +28,9 @@ public class HomeControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @MockBean
+    private ProvinceService provinceService;
 
     private MockMvc mockMvc;
 

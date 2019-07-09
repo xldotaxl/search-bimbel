@@ -2,6 +2,7 @@ package it.aldi.app.controller;
 
 import it.aldi.app.controller.dto.SearchBimbelDto;
 import it.aldi.app.security.util.SecurityUtil;
+import it.aldi.app.service.ProvinceService;
 import it.aldi.app.util.SessionAttrConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,12 @@ public class HomeController {
 
     private static final String HOME_VIEW = "home/home";
 
+    private final ProvinceService provinceService;
+
+    public HomeController(ProvinceService provinceService) {
+        this.provinceService = provinceService;
+    }
+
     /**
      * Show home page.
      */
@@ -44,9 +51,15 @@ public class HomeController {
     public String searchResult(@ModelAttribute SearchBimbelDto searchBimbelDto, HttpSession session,
                                RedirectAttributes redirectAttributes, SessionStatus sessionStatus) {
 
-        session.setAttribute(SessionAttrConstant.getSearchQuery(), searchBimbelDto);
         // TODO: redirect to search-result page
         log.info("post reqs attr: {} = {}", SessionAttrConstant.getSearchQuery(), searchBimbelDto);
         return redirect() + Routes.INDEX;
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("provinces", provinceService.findAll());
+        model.addAttribute(new SearchBimbelDto());
+        return HOME_VIEW;
     }
 }

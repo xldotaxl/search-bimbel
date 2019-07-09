@@ -8,6 +8,7 @@ public class Routes {
     /*
      * MVC endpoint
      */
+    public static final String HOME = "/home";
     public static final String INDEX = "/";
     public static final String LOGOUT = "/logout";
     public static final String REGISTER = "/register";

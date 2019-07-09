@@ -28,7 +28,7 @@ public final class SecurityUtil {
             return Routes.STUDENT_HOME;
         }
 
-        return Routes.INDEX;
+        return Routes.HOME;
     }
 
     public static boolean isOwner(Set<Role> roles) {
