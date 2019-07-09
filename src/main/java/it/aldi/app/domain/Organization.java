@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -49,7 +50,15 @@ public class Organization implements Serializable {
     @JsonIgnore
     private Set<BimbelUser> bimbelUsers = new HashSet<>();
 
-    private Organization() {}
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "organization_role",
+        joinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+
+    private Organization() {
+    }
 
     private Organization(String name) {
         this.name = name;
@@ -58,8 +67,8 @@ public class Organization implements Serializable {
         activated = false;
     }
 
-    public static Organization createDefault(String name) {
-        return new Organization(name);
+    public static Organization createDefault(String name, Set<Role> roles) {
+        return new Organization(name).roles(roles);
     }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -146,6 +155,31 @@ public class Organization implements Serializable {
 
     public void setBimbelUsers(Set<BimbelUser> bimbelUsers) {
         this.bimbelUsers = bimbelUsers;
+    }
+
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
+    }
+
+    public Organization roles(Set<Role> roles) {
+        this.roles = Collections.unmodifiableSet(roles);
+        return this;
+    }
+
+    public Organization addRole(Role role) {
+        roles.add(role);
+        role.getOrganizations().add(this);
+        return this;
+    }
+
+    public Organization removeRole(Role role) {
+        roles.remove(role);
+        role.getOrganizations().remove(this);
+        return this;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

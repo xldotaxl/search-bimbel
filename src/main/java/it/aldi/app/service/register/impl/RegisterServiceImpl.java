@@ -34,10 +34,10 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public BimbelUser registerUser(BimbelUserDto bimbelUserDto) {
+    public void registerUser(BimbelUserDto bimbelUserDto) {
         Set<Role> assignedRoles = assignRoles(bimbelUserDto);
         BimbelUser bimbelUser = BimbelUser.register(bimbelUserDto, assignedRoles);
-        return bimbelUserService.save(bimbelUser);
+        bimbelUserService.save(bimbelUser);
     }
 
     @Override

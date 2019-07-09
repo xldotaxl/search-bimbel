@@ -20,12 +20,12 @@ public interface OrganizationService {
     Organization save(Organization organization);
 
     /**
-     * Get all the organizations.
+     * Get all the Organization with eager load of many-to-many relationships.
      *
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<Organization> findAll(Pageable pageable);
+    Page<Organization> findAllWithEagerRelationships(Pageable pageable);
 
     /**
      * Get the "id" organization.

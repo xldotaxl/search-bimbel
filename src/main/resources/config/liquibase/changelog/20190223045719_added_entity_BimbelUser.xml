@@ -51,17 +51,6 @@
 
         <addPrimaryKey columnNames="bimbel_user_id, organization_id" tableName="bimbel_user_organization"/>
 
-        <createTable tableName="bimbel_user_role">
-            <column name="role_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="bimbel_user_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="bimbel_user_id, role_id" tableName="bimbel_user_role"/>
-
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

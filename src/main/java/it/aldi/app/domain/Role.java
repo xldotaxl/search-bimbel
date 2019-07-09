@@ -9,6 +9,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,11 +30,6 @@ public class Role implements Serializable {
 
     @Column(name = "name")
     private String name;
-
-    @ManyToMany(mappedBy = "roles")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JsonIgnore
-    private Set<BimbelUser> bimbelUsers;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -70,6 +66,11 @@ public class Role implements Serializable {
         return new Role(RoleConstant.student());
     }
 
+    @ManyToMany(mappedBy = "roles")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JsonIgnore
+    private Set<Organization> organizations = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -90,31 +91,6 @@ public class Role implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<BimbelUser> getBimbelUsers() {
-        return Collections.unmodifiableSet(bimbelUsers);
-    }
-
-    public Role bimbelUsers(Set<BimbelUser> bimbelUsers) {
-        this.bimbelUsers = Collections.unmodifiableSet(bimbelUsers);
-        return this;
-    }
-
-    public Role addBimbelUser(BimbelUser bimbelUser) {
-        bimbelUsers.add(bimbelUser);
-        bimbelUser.getRoles().add(this);
-        return this;
-    }
-
-    public Role removeBimbelUser(BimbelUser bimbelUser) {
-        bimbelUsers.remove(bimbelUser);
-        bimbelUser.getRoles().remove(this);
-        return this;
-    }
-
-    public void setBimbelUsers(Set<BimbelUser> bimbelUsers) {
-        this.bimbelUsers = Collections.unmodifiableSet(bimbelUsers);
     }
 
     public Set<Privilege> getPrivileges() {
@@ -140,6 +116,31 @@ public class Role implements Serializable {
 
     public void setPrivileges(Set<Privilege> privileges) {
         this.privileges = Collections.unmodifiableSet(privileges);
+    }
+
+    public Set<Organization> getOrganizations() {
+        return Collections.unmodifiableSet(organizations);
+    }
+
+    public Role organizations(Set<Organization> organizations) {
+        this.organizations = Collections.unmodifiableSet(organizations);
+        return this;
+    }
+
+    public Role addOrganization(Organization organization) {
+        organizations.add(organization);
+        organization.getRoles().add(this);
+        return this;
+    }
+
+    public Role removeOrganization(Organization organization) {
+        organizations.remove(organization);
+        organization.getRoles().remove(this);
+        return this;
+    }
+
+    public void setOrganizations(Set<Organization> organizations) {
+        this.organizations = Collections.unmodifiableSet(organizations);
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

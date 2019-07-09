@@ -7,7 +7,7 @@ import it.aldi.app.domain.Role;
 import java.util.List;
 
 public interface RegisterService {
-    BimbelUser registerUser(BimbelUserDto bimbelUserDto);
+    void registerUser(BimbelUserDto bimbelUserDto);
 
     List<Role> getPublicRoles();
 

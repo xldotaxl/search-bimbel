@@ -64,13 +64,6 @@ public class BimbelUser implements Serializable {
         inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
     private Set<Organization> organizations = new HashSet<>();
 
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @JoinTable(name = "bimbel_user_role",
-        joinColumns = @JoinColumn(name = "bimbel_user_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Set<Role> roles = new HashSet<>();
-
     private BimbelUser() {
     }
 
@@ -86,14 +79,13 @@ public class BimbelUser implements Serializable {
     }
 
     public static BimbelUser register(BimbelUserDto bimbelUserDto, Set<Role> roles) {
-        for (Role role : roles) {
-            if (RoleConstant.owner().equals(role.getName())) {
-                Organization organization = Organization.createDefault(bimbelUserDto.getName());
-                Set<Organization> organizations = new HashSet<>(Collections.singletonList(organization));
-                return from(bimbelUserDto).roles(roles).organizations(organizations);
-            }
+        if (roles.contains(Role.owner())) {
+            Organization organization = Organization.createDefault(bimbelUserDto.getName(), roles);
+            Set<Organization> organizations = new HashSet<>(Collections.singletonList(organization));
+            return from(bimbelUserDto).organizations(organizations);
         }
-        return from(bimbelUserDto).roles(roles);
+
+        return from(bimbelUserDto);
     }
 
     public static BimbelUser empty() {
@@ -184,31 +176,6 @@ public class BimbelUser implements Serializable {
 
     public void setOrganizations(Set<Organization> organizations) {
         this.organizations = Collections.unmodifiableSet(organizations);
-    }
-
-    public Set<Role> getRoles() {
-        return Collections.unmodifiableSet(roles);
-    }
-
-    public BimbelUser roles(Set<Role> roles) {
-        this.roles = Collections.unmodifiableSet(roles);
-        return this;
-    }
-
-    public BimbelUser addRole(Role role) {
-        roles.add(role);
-        role.getBimbelUsers().add(this);
-        return this;
-    }
-
-    public BimbelUser removeRole(Role role) {
-        roles.remove(role);
-        role.getBimbelUsers().remove(this);
-        return this;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = Collections.unmodifiableSet(roles);
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BimbelUserDetailsService implements UserDetailsService {
 
-    private @NonNull BimbelUserRepository bimbelUserRepository;
+    private final @NonNull BimbelUserRepository bimbelUserRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
