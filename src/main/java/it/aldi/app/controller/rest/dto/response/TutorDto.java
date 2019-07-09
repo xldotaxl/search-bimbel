@@ -8,14 +8,12 @@ import java.util.List;
 
 @Value
 public class TutorDto {
-    private Long id;
     private String name;
     private String email;
     private String username;
     private List<String> subjects;
 
     public TutorDto(BimbelUser bimbelUser) {
-        id = bimbelUser.getId();
         name = bimbelUser.getName();
         email = bimbelUser.getEmail();
         username = bimbelUser.getEmail();

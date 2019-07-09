@@ -1,6 +1,6 @@
 const $tableStudent = $('#table-student');
 
-function getActionButton(id) {
+function getActionButton(username) {
   return `<button href="#">Delete</button>`;
 }
 
@@ -19,7 +19,7 @@ const dataTableProp = {
     {data: 'email'},
     {data: 'role'},
     {
-      data: 'id',
+      data: 'username',
       render: (data) => {
         return getActionButton(data);
       },

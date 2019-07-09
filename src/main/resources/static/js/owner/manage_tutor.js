@@ -1,6 +1,6 @@
 const $tableTutor = $('#table-tutor');
 
-function getActionButton(id) {
+function getActionButton(username) {
   return `<a href="#">View</a> | <a href="#">Delete</a>`;
 }
 
@@ -19,7 +19,7 @@ const dataTableProp = {
     {data: 'email'},
     {data: 'subjects'},
     {
-      data: 'id',
+      data: 'username',
       render: (data) => {
         return getActionButton(data);
       },

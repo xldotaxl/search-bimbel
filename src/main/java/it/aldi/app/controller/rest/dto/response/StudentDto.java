@@ -9,14 +9,12 @@ import java.util.List;
 
 @Value
 public class StudentDto {
-    private Long id;
     private String name;
     private String email;
     private String username;
     private String role;
 
     private StudentDto(BimbelUser bimbelUser) {
-        id = bimbelUser.getId();
         name = bimbelUser.getName();
         email = bimbelUser.getEmail();
         username = bimbelUser.getUsername();
